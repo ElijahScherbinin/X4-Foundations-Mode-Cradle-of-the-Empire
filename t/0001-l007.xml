@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<language id="7">
+  <page id="87466964" title="Колыбель Империи тексты" descr="" voice="no">
+    <t id="1">Колыбель Империи</t>
+    <t id="2">Это кластер секторов в котором суждено зародиться могущественной Империи</t>
+    <t id="3">Трон Императора</t>
+    <t id="4">Гнев Императора</t>
+    <t id="5">Радость Императора</t>
+  </page>
+  <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="no">
+    <t id="140001">{87466966,1001}(Империя Прайм)</t>
+  </page>
+  <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="no">
+    <t id="1001">Империя Прайм</t>
+  </page>
+</language>

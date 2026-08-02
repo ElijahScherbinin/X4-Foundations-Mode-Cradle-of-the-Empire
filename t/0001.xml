@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <page id="87466964" title="The Cradle of Empire texts" descr="" voice="no">
+    <t id="1">The Cradle of Empire</t>
+    <t id="2">This is a cluster of sectors where a powerful empire is destined to emerge</t>
+    <t id="3">The Emperor's Throne</t>
+    <t id="4">The Emperor's Wrath</t>
+    <t id="5">The Emperor's Joy</t>
+  </page>
+  <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="no">
+    <t id="140001">{87466966,1001}(Empire Prime)</t>
+  </page>
+  <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="no">
+    <t id="1001">{Empire Prime}</t>
+  </page>
+</language>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<regions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="region_definitions.xsd">
+  <region name="coe_re_minerals_hash_48613123" density="1.5" rotation="0" noisescale="10000" seed="1337" minnoisevalue="0.15" maxnoisevalue="1">
+    <boundary class="cylinder">
+      <size r="657895" linear="10000" />
+    </boundary>
+    <falloff>
+      <lateral>
+        <step position="0.0" value="0.0" />
+        <step position="0.1" value="1.0" />
+        <step position="0.9" value="1.0" />
+        <step position="1.0" value="0.0" />
+      </lateral>
+      <radial>
+        <step position="0.0" value="1.0" />
+        <step position="0.8" value="1.0" />
+        <step position="1.0" value="0.0" />
+      </radial>
+    </falloff>
+    <fields>
+      <asteroid groupref="asteroid_ore_l" densityfactor="1" rotation="0" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.7" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_m" densityfactor="2" rotation="0" rotationvariation="8" noisescale="15000" seed="8888" minnoisevalue="0.7" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_s" densityfactor="2" rotation="0" rotationvariation="16" noisescale="1500" seed="8888" minnoisevalue="0.7" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_xl" densityfactor="0.01" rotation="360" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.6" maxnoisevalue="1" lodrule="asteroidxl" />
+      <asteroid groupref="asteroid_ore_xs" densityfactor="0.6" rotation="0" rotationvariation="32" noisescale="1500" seed="8888" minnoisevalue="0.65" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ice_l" densityfactor="3" rotation="0" rotationvariation="8" noisescale="5000" seed="26041984" minnoisevalue="0.75" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ice_m" densityfactor="2" rotation="0" rotationvariation="16" noisescale="5000" seed="26041984" minnoisevalue="0.75" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ice_s" densityfactor="4" rotation="0" rotationvariation="32" noisescale="5000" seed="26041984" minnoisevalue="0.65" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ice_xl" densityfactor="1" rotation="0" rotationvariation="4" noisescale="35000" seed="26041984" minnoisevalue="0.05" maxnoisevalue="0.25" lodrule="asteroidxl" />
+      <asteroid groupref="asteroid_ice_xs" densityfactor="2" rotation="0" rotationvariation="64" noisescale="5000" seed="26041984" minnoisevalue="0.65" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_silicon_xs" densityfactor="1" rotation="360" rotationvariation="32" noisescale="1500" seed="8888" minnoisevalue="0.35" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_silicon_xl" densityfactor="0.051" rotation="0" rotationvariation="4" noisescale="24000" seed="26041984" minnoisevalue="0.7" maxnoisevalue="1" lodrule="asteroidxl" />
+      <asteroid groupref="asteroid_silicon_s" densityfactor="2" rotation="360" rotationvariation="16" noisescale="1500" seed="8888" minnoisevalue="0.5" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_silicon_m" densityfactor="2" rotation="360" rotationvariation="8" noisescale="15000" seed="8888" minnoisevalue="0.6" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_xxl" densityfactor="0.01" rotation="360" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.65" maxnoisevalue="1" lodrule="asteroidxl" />
+      <asteroid groupref="asteroid_silicon_l" densityfactor="1" rotation="360" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.6" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_xs" densityfactor="0.6" rotation="0" rotationvariation="32" noisescale="1500" seed="8888" minnoisevalue="0.65" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_xl" densityfactor="0.01" rotation="360" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.6" maxnoisevalue="1" lodrule="asteroidxl" />
+      <asteroid groupref="asteroid_ore_s" densityfactor="2" rotation="0" rotationvariation="16" noisescale="1500" seed="8888" minnoisevalue="0.7" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_m" densityfactor="2" rotation="0" rotationvariation="8" noisescale="15000" seed="8888" minnoisevalue="0.7" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_ore_l" densityfactor="1" rotation="0" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.7" maxnoisevalue="1" />
+    </fields>
+  </region>
+  <region name="coe_re_gases_hash_16358208" density="1.5" rotation="0" noisescale="10000" seed="1337" minnoisevalue="0.15" maxnoisevalue="1">
+    <boundary class="cylinder">
+      <size r="371053" linear="40000" />
+    </boundary>
+    <falloff />
+    <fields>
+      <nebula ref="fogvolume_small_macro" localred="100" localgreen="100" localblue="100" localdensity="0.8" uniformred="49" uniformgreen="49" uniformblue="49" uniformdensity="0.2" backgroundfog="false" resources="methane" />
+    </fields>
+  </region>
+  <region name="coe_re_nividium_hash_72490874" density="1.5" rotation="0" noisescale="10000" seed="1337" minnoisevalue="0.15" maxnoisevalue="1">
+    <boundary class="cylinder">
+      <size r="78947" linear="10000" />
+    </boundary>
+    <falloff />
+    <fields>
+      <asteroid groupref="asteroid_nividium_l" densityfactor="0.25" rotation="0" rotationvariation="4" noisescale="15000" seed="8888" minnoisevalue="0.85" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_nividium_m" densityfactor="12" rotation="360" rotationvariation="8" noisescale="1500" seed="2001" minnoisevalue="0.6" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_nividium_s" densityfactor="15" rotation="0" rotationvariation="16" noisescale="1500" seed="2001" minnoisevalue="0.5" maxnoisevalue="1" />
+      <asteroid groupref="asteroid_nividium_xs" densityfactor="5" rotation="0" rotationvariation="32" noisescale="1500" seed="2001" minnoisevalue="0.35" maxnoisevalue="1" />
+    </fields>
+  </region>
+  <region name="coe_re_scarp_hash_99085673" density="1.5" rotation="0" noisescale="10000" seed="1337" minnoisevalue="0.15" maxnoisevalue="1">
+    <boundary class="cylinder">
+      <size r="434211" linear="10000" />
+    </boundary>
+    <falloff />
+    <fields>
+      <debris groupref="debris_xenon_m" densityfactor="0.1" rotation="360" rotationvariation="4" noisescale="10000" seed="32" minnoisevalue="0.6" maxnoisevalue="1" distancefactor="2" />
+      <debris groupref="debris_xenon_xl" densityfactor="0.05" rotation="360" rotationvariation="4" noisescale="10000" seed="32" minnoisevalue="0.6" maxnoisevalue="1" distancefactor="2" />
+      <debris groupref="debris_xenon_m" densityfactor="0.1" rotation="360" rotationvariation="4" noisescale="10000" seed="32" minnoisevalue="0.6" maxnoisevalue="1" distancefactor="2" />
+      <debris groupref="debris_khaak_s" densityfactor="0.4" rotation="360" rotationvariation="10" noisescale="10000" seed="32" minnoisevalue="0.5" maxnoisevalue="1" distancefactor="2" />
+      <debris groupref="debris_khaak_m" densityfactor="4" rotation="360" rotationvariation="10" noisescale="10000" seed="32" minnoisevalue="0.5" maxnoisevalue="1" distancefactor="2" />
+    </fields>
+  </region>
+  <region name="coe_re_lockbox_rare_hash_52549803" density="1.5" rotation="0" noisescale="10000" seed="1337" minnoisevalue="0.15" maxnoisevalue="1">
+    <boundary class="cylinder">
+      <size r="394737" linear="5000" />
+    </boundary>
+    <falloff>
+      <lateral>
+        <step position="0.0" value="0.0" />
+        <step position="0.1" value="1.0" />
+        <step position="0.9" value="1.0" />
+        <step position="1.0" value="0.0" />
+      </lateral>
+      <radial>
+        <step position="0.0" value="1.0" />
+        <step position="0.8" value="1.0" />
+        <step position="1.0" value="0.0" />
+      </radial>
+    </falloff>
+    <fields>
+      <object groupref="lockboxes_rare" densityfactor="2.5E-05" rotation="0" rotationvariation="70" minnoisevalue="0" maxnoisevalue="1" />
+    </fields>
+  </region>
+  <region name="coe_re_lockbox_extra_hash_53165036" density="1.5" rotation="0" noisescale="10000" seed="1337" minnoisevalue="0.15" maxnoisevalue="1">
+    <boundary class="cylinder">
+      <size r="165789" linear="5000" />
+    </boundary>
+    <falloff>
+      <lateral>
+        <step position="0.0" value="0.0" />
+        <step position="0.1" value="1.0" />
+        <step position="0.9" value="1.0" />
+        <step position="1.0" value="0.0" />
+      </lateral>
+      <radial>
+        <step position="0.0" value="1.0" />
+        <step position="0.8" value="1.0" />
+        <step position="1.0" value="0.0" />
+      </radial>
+    </falloff>
+    <fields>
+      <object groupref="lockboxes_extra" densityfactor="5E-05" rotation="0" rotationvariation="70" minnoisevalue="0.1" maxnoisevalue="1" />
+    </fields>
+  </region>
+</regions>
