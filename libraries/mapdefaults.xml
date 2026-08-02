@@ -97,5 +97,25 @@
         <system />
       </properties>
     </dataset>
+    <dataset macro="coe_CL_c002_macro">
+      <properties>
+        <identification name="{87466964,6}" description="{87466964,7}" image="enc_cluster01" />
+        <sounds>
+          <music ref="music_soundtrack_argon" />
+        </sounds>
+        <area factionlogic="false" />
+        <system />
+      </properties>
+    </dataset>
+    <dataset macro="coe_SE_c002_s001_macro">
+      <properties>
+        <identification name="{87466964,6}" description="{87466964,7}" image="enc_cluster01" />
+        <resourceareas>
+          <resourcearea amount="1" ref="sphere_small_hydrogen_low_fast" />
+        </resourceareas>
+        <area sunlight="0.1" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <system />
+      </properties>
+    </dataset>
   </add>
 </diff>

@@ -133,7 +133,23 @@
       </connection>
       <connection ref="content">
         <macro>
-          <component connection="space" ref="Cluster_14" />
+          <component connection="space" ref="Cluster_01" />
+        </macro>
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_CL_c002_macro" class="cluster">
+    <component ref="standardcluster" />
+    <connections>
+      <connection name="coe_SE_c002_s001_connection" ref="sectors">
+        <offset>
+          <position x="0" y="0" z="0" />
+        </offset>
+        <macro ref="coe_SE_c002_s001_macro" connection="cluster" />
+      </connection>
+      <connection ref="content">
+        <macro>
+          <component connection="space" ref="Cluster_02" />
         </macro>
       </connection>
     </connections>

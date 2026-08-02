@@ -72,30 +72,6 @@
       </connection>
     </connections>
   </macro>
-  <macro name="coe_ZO_c001_s002_z007_macro" class="zone">
-    <component ref="standardzone" />
-    <connections>
-      <connection name="coe_GA_g001_c001_s002_z007_c001_s003_z007_connection" ref="gates">
-        <offset>
-          <position x="0" y="1000" z="0" />
-          <rotation yaw="240" pitch="0" roll="0" />
-        </offset>
-        <macro ref="props_gates_orb_accelerator_01_macro" connection="space" />
-      </connection>
-    </connections>
-  </macro>
-  <macro name="coe_ZO_c001_s002_z017_macro" class="zone">
-    <component ref="standardzone" />
-    <connections>
-      <connection name="coe_GA_g001_c001_s002_z017_Cluster_14_Sector001_z001_connection" ref="gates">
-        <offset>
-          <position x="0" y="1000" z="0" />
-          <rotation yaw="60" pitch="0" roll="0" />
-        </offset>
-        <macro ref="props_gates_anc_gate_macro" connection="space" />
-      </connection>
-    </connections>
-  </macro>
   <macro name="coe_ZO_c001_s002_z018_macro" class="zone">
     <component ref="standardzone" />
     <connections />
@@ -132,6 +108,18 @@
     <component ref="standardzone" />
     <connections />
   </macro>
+  <macro name="coe_ZO_c001_s002_z027_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c001_s002_z027_c002_s001_z007_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="300" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_orb_accelerator_01_macro" connection="space" />
+      </connection>
+    </connections>
+  </macro>
   <macro name="coe_ZO_c001_s003_z006_macro" class="zone">
     <component ref="standardzone" />
     <connections>
@@ -139,18 +127,6 @@
         <offset>
           <position x="0" y="1000" z="0" />
           <rotation yaw="120" pitch="0" roll="0" />
-        </offset>
-        <macro ref="props_gates_orb_accelerator_01_macro" connection="space" />
-      </connection>
-    </connections>
-  </macro>
-  <macro name="coe_ZO_c001_s003_z007_macro" class="zone">
-    <component ref="standardzone" />
-    <connections>
-      <connection name="coe_GA_g001_c001_s003_z007_c001_s002_z007_connection" ref="gates">
-        <offset>
-          <position x="0" y="1000" z="0" />
-          <rotation yaw="60" pitch="0" roll="0" />
         </offset>
         <macro ref="props_gates_orb_accelerator_01_macro" connection="space" />
       </connection>
@@ -189,6 +165,74 @@
     <connections />
   </macro>
   <macro name="coe_ZO_c001_s003_z016_macro" class="zone">
+    <component ref="standardzone" />
+    <connections />
+  </macro>
+  <macro name="coe_ZO_c002_s001_z006_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c002_s001_z006_Cluster_14_Sector001_z002_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="0" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_anc_gate_macro" connection="space" />
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_ZO_c002_s001_z007_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c002_s001_z007_c001_s002_z027_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="120" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_orb_accelerator_01_macro" connection="space" />
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_ZO_c002_s001_z008_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c002_s001_z008_Cluster_29_Sector001_z001_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="180" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_anc_gate_macro" connection="space" />
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_ZO_c002_s001_z009_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c002_s001_z009_Cluster_502_Sector001_z001_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="240" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_anc_gate_macro" connection="space" />
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_ZO_c002_s001_z010_macro" class="zone">
+    <component ref="standardzone" />
+    <connections />
+  </macro>
+  <macro name="coe_ZO_c002_s001_z011_macro" class="zone">
+    <component ref="standardzone" />
+    <connections />
+  </macro>
+  <macro name="coe_ZO_c002_s001_z012_macro" class="zone">
+    <component ref="standardzone" />
+    <connections />
+  </macro>
+  <macro name="coe_ZO_c002_s001_z013_macro" class="zone">
+    <component ref="standardzone" />
+    <connections />
+  </macro>
+  <macro name="coe_ZO_c002_s001_z014_macro" class="zone">
     <component ref="standardzone" />
     <connections />
   </macro>

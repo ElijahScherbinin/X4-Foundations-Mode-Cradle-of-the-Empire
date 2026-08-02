@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<content id="The_Cradle_of_Empire" name="The Cradle of Empire" description="Added 3 new sectors." author="QvaserZver" version="100" date="08/01/2026" save="0" enabled="1">
+<content id="qz_mod_empire" name="The Cradle of Empire" description="Added 4 new sectors." author="QvaserZver" version="100" date="08/02/2026" save="0" enabled="1">
+  <dependency id="ego_dlc_pirate" optional="false" name="Tides Of Avarice" />
   <dependency version="900" />
-  <text language="7" name="Колыбель Империи" description="Добавляет 3 новых сектора." author="QvaserZver" />
+  <text language="7" name="Колыбель Империи" description="Добавляет 4 новых сектора." author="QvaserZver" />
 </content>

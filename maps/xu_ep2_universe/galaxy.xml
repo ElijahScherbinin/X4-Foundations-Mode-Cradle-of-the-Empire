@@ -7,8 +7,20 @@
       </offset>
       <macro ref="coe_CL_c001_macro" connection="galaxy" />
     </connection>
-    <connection name="coe_GA_g001_Cluster_14_Sector001_z001_c001_s002_z017_connection" ref="destination" path="../Cluster_14_connection/Cluster_14_Sector001_connection/coe_ZO_Cluster_14_Sector001_z001_connection/coe_GA_g001_Cluster_14_Sector001_z001_c001_s002_z017_connection">
-      <macro connection="destination" path="../../../../../coe_CL_c001_connection/coe_SE_c001_s002_connection/coe_ZO_c001_s002_z017_connection/coe_GA_g001_c001_s002_z017_Cluster_14_Sector001_z001_connection" />
+    <connection name="coe_CL_c002_connection" ref="clusters">
+      <offset>
+        <position x="-60000000" y="0" z="34640000" />
+      </offset>
+      <macro ref="coe_CL_c002_macro" connection="galaxy" />
+    </connection>
+    <connection name="coe_GA_g001_Cluster_502_Sector001_z001_c002_s001_z009_connection" ref="destination" path="../Cluster_502_connection/Cluster_502_Sector001_connection/coe_ZO_Cluster_502_Sector001_z001_connection/coe_GA_g001_Cluster_502_Sector001_z001_c002_s001_z009_connection">
+      <macro connection="destination" path="../../../../../coe_CL_c002_connection/coe_SE_c002_s001_connection/coe_ZO_c002_s001_z009_connection/coe_GA_g001_c002_s001_z009_Cluster_502_Sector001_z001_connection" />
+    </connection>
+    <connection name="coe_GA_g001_Cluster_29_Sector001_z001_c002_s001_z008_connection" ref="destination" path="../Cluster_29_connection/Cluster_29_Sector001_connection/coe_ZO_Cluster_29_Sector001_z001_connection/coe_GA_g001_Cluster_29_Sector001_z001_c002_s001_z008_connection">
+      <macro connection="destination" path="../../../../../coe_CL_c002_connection/coe_SE_c002_s001_connection/coe_ZO_c002_s001_z008_connection/coe_GA_g001_c002_s001_z008_Cluster_29_Sector001_z001_connection" />
+    </connection>
+    <connection name="coe_GA_g001_Cluster_14_Sector001_z002_c002_s001_z006_connection" ref="destination" path="../Cluster_14_connection/Cluster_14_Sector001_connection/coe_ZO_Cluster_14_Sector001_z002_connection/coe_GA_g001_Cluster_14_Sector001_z002_c002_s001_z006_connection">
+      <macro connection="destination" path="../../../../../coe_CL_c002_connection/coe_SE_c002_s001_connection/coe_ZO_c002_s001_z006_connection/coe_GA_g001_c002_s001_z006_Cluster_14_Sector001_z002_connection" />
     </connection>
     <connection name="coe_GA_g001_c001_s001_z006_c001_s002_z006_connection" ref="destination" path="../coe_CL_c001_connection/coe_SE_c001_s001_connection/coe_ZO_c001_s001_z006_connection/coe_GA_g001_c001_s001_z006_c001_s002_z006_connection">
       <macro connection="destination" path="../../../../../coe_CL_c001_connection/coe_SE_c001_s002_connection/coe_ZO_c001_s002_z006_connection/coe_GA_g001_c001_s002_z006_c001_s001_z006_connection" />
@@ -16,8 +28,8 @@
     <connection name="coe_GA_g001_c001_s001_z007_c001_s003_z006_connection" ref="destination" path="../coe_CL_c001_connection/coe_SE_c001_s001_connection/coe_ZO_c001_s001_z007_connection/coe_GA_g001_c001_s001_z007_c001_s003_z006_connection">
       <macro connection="destination" path="../../../../../coe_CL_c001_connection/coe_SE_c001_s003_connection/coe_ZO_c001_s003_z006_connection/coe_GA_g001_c001_s003_z006_c001_s001_z007_connection" />
     </connection>
-    <connection name="coe_GA_g001_c001_s002_z007_c001_s003_z007_connection" ref="destination" path="../coe_CL_c001_connection/coe_SE_c001_s002_connection/coe_ZO_c001_s002_z007_connection/coe_GA_g001_c001_s002_z007_c001_s003_z007_connection">
-      <macro connection="destination" path="../../../../../coe_CL_c001_connection/coe_SE_c001_s003_connection/coe_ZO_c001_s003_z007_connection/coe_GA_g001_c001_s003_z007_c001_s002_z007_connection" />
+    <connection name="coe_GA_g001_c001_s002_z027_c002_s001_z007_connection" ref="destination" path="../coe_CL_c001_connection/coe_SE_c001_s002_connection/coe_ZO_c001_s002_z027_connection/coe_GA_g001_c001_s002_z027_c002_s001_z007_connection">
+      <macro connection="destination" path="../../../../../coe_CL_c002_connection/coe_SE_c002_s001_connection/coe_ZO_c002_s001_z007_connection/coe_GA_g001_c002_s001_z007_c001_s002_z027_connection" />
     </connection>
   </add>
 </diff>

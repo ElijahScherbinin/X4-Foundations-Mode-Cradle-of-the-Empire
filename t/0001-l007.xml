@@ -6,6 +6,8 @@
     <t id="3">Трон Императора</t>
     <t id="4">Гнев Императора</t>
     <t id="5">Радость Императора</t>
+    <t id="6">Имперский Предел</t>
+    <t id="7"></t>
   </page>
   <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="no">
     <t id="140001">{87466966,1001}(Империя Прайм)</t>

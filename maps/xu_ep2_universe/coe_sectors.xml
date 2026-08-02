@@ -80,18 +80,6 @@
         </offset>
         <macro ref="coe_ZO_c001_s002_z006_macro" connection="sector" />
       </connection>
-      <connection name="coe_ZO_c001_s002_z007_connection" ref="zones">
-        <offset>
-          <position x="122727" y="0" z="93182" />
-        </offset>
-        <macro ref="coe_ZO_c001_s002_z007_macro" connection="sector" />
-      </connection>
-      <connection name="coe_ZO_c001_s002_z017_connection" ref="zones">
-        <offset>
-          <position x="-100000" y="0" z="-61364" />
-        </offset>
-        <macro ref="coe_ZO_c001_s002_z017_macro" connection="sector" />
-      </connection>
       <connection name="coe_ZO_c001_s002_z018_connection" ref="zones">
         <offset>
           <position x="-150000" y="0" z="-150000" />
@@ -146,6 +134,12 @@
         </offset>
         <macro ref="coe_ZO_c001_s002_z026_macro" connection="sector" />
       </connection>
+      <connection name="coe_ZO_c001_s002_z027_connection" ref="zones">
+        <offset>
+          <position x="175000" y="0" z="-134091" />
+        </offset>
+        <macro ref="coe_ZO_c001_s002_z027_macro" connection="sector" />
+      </connection>
     </connections>
   </macro>
   <macro name="coe_SE_c001_s003_macro" class="sector">
@@ -156,12 +150,6 @@
           <position x="-102273" y="0" z="65909" />
         </offset>
         <macro ref="coe_ZO_c001_s003_z006_macro" connection="sector" />
-      </connection>
-      <connection name="coe_ZO_c001_s003_z007_connection" ref="zones">
-        <offset>
-          <position x="-100000" y="0" z="-59091" />
-        </offset>
-        <macro ref="coe_ZO_c001_s003_z007_macro" connection="sector" />
       </connection>
       <connection name="coe_ZO_c001_s003_z008_connection" ref="zones">
         <offset>
@@ -216,6 +204,65 @@
           <position x="150000" y="0" z="150000" />
         </offset>
         <macro ref="coe_ZO_c001_s003_z016_macro" connection="sector" />
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_SE_c002_s001_macro" class="sector">
+    <component ref="standardsector" />
+    <connections>
+      <connection name="coe_ZO_c002_s001_z006_connection" ref="zones">
+        <offset>
+          <position x="5051" y="0" z="-123737" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z006_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z007_connection" ref="zones">
+        <offset>
+          <position x="-88384" y="0" z="41667" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z007_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z008_connection" ref="zones">
+        <offset>
+          <position x="6313" y="0" z="117424" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z008_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z009_connection" ref="zones">
+        <offset>
+          <position x="128788" y="0" z="87121" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z009_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z010_connection" ref="zones">
+        <offset>
+          <position x="-111804" y="0" z="0" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z010_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z011_connection" ref="zones">
+        <offset>
+          <position x="0" y="0" z="0" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z011_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z012_connection" ref="zones">
+        <offset>
+          <position x="111804" y="0" z="0" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z012_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z013_connection" ref="zones">
+        <offset>
+          <position x="-111804" y="0" z="111804" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z013_macro" connection="sector" />
+      </connection>
+      <connection name="coe_ZO_c002_s001_z014_connection" ref="zones">
+        <offset>
+          <position x="0" y="0" z="111804" />
+        </offset>
+        <macro ref="coe_ZO_c002_s001_z014_macro" connection="sector" />
       </connection>
     </connections>
   </macro>
