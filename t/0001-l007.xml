@@ -1,18 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <language id="7">
-  <page id="87466964" title="Колыбель Империи тексты" descr="" voice="no">
-    <t id="1">Колыбель Империи</t>
-    <t id="2">Это кластер секторов в котором суждено зародиться могущественной Империи</t>
-    <t id="3">Трон Императора</t>
-    <t id="4">Гнев Императора</t>
-    <t id="5">Радость Императора</t>
-    <t id="6">Имперский Предел</t>
-    <t id="7"></t>
+  <page id="87466964" title="coe T Files" descr="" voice="yes">
+    <t id="1">Имперский Предел</t>
+    <t id="2"></t>
+    <t id="3">Имперский Предел</t>
+    <t id="4"></t>
+    <t id="5">Колыбель Империи</t>
+    <t id="6"></t>
+    <t id="7">Трон Императора</t>
+    <t id="8"></t>
+    <t id="9">Гнев Императора</t>
+    <t id="10"></t>
+    <t id="11">Радость Императора</t>
+    <t id="12"></t>
   </page>
-  <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="no">
-    <t id="140001">{87466966,1001}(Империя Прайм)</t>
+  <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="yes">
+    <t id="1">{87466966,1}(Империя Прайм)</t>
   </page>
-  <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="no">
-    <t id="1001">Империя Прайм</t>
+  <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="yes">
+    <t id="1">Империя Прайм</t>
   </page>
 </language>

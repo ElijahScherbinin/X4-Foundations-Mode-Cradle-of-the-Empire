@@ -5,135 +5,13 @@
     <connections>
       <connection name="coe_SE_c001_s001_connection" ref="sectors">
         <offset>
-          <position x="-1000000" y="0" z="1000000" />
+          <position x="0" y="0" z="0" />
         </offset>
         <macro ref="coe_SE_c001_s001_macro" connection="cluster" />
       </connection>
-      <connection name="c001_s001_r001_coe_re_minerals_hash_48613123_connection" ref="regions">
-        <offset>
-          <position x="-1000000" y="-10000" z="1000000" />
-        </offset>
-        <macro name="c001_s001_r001_coe_re_minerals_hash_48613123_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_minerals_hash_48613123" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s001_r002_coe_re_gases_hash_16358208_connection" ref="regions">
-        <offset>
-          <position x="-1110526" y="0" z="1205263" />
-        </offset>
-        <macro name="c001_s001_r002_coe_re_gases_hash_16358208_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_gases_hash_16358208" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s001_r003_coe_re_nividium_hash_72490874_connection" ref="regions">
-        <offset>
-          <position x="-992105" y="-10000" z="1018421" />
-        </offset>
-        <macro name="c001_s001_r003_coe_re_nividium_hash_72490874_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_nividium_hash_72490874" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="coe_SE_c001_s002_connection" ref="sectors">
-        <offset>
-          <position x="-1000000" y="0" z="-1000000" />
-        </offset>
-        <macro ref="coe_SE_c001_s002_macro" connection="cluster" />
-      </connection>
-      <connection name="c001_s002_r001_coe_re_scarp_hash_99085673_connection" ref="regions">
-        <offset>
-          <position x="-1000000" y="-10000" z="-1000000" />
-        </offset>
-        <macro name="c001_s002_r001_coe_re_scarp_hash_99085673_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_scarp_hash_99085673" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s002_r002_coe_re_nividium_hash_72490874_connection" ref="regions">
-        <offset>
-          <position x="-957895" y="-20000" z="-1163158" />
-        </offset>
-        <macro name="c001_s002_r002_coe_re_nividium_hash_72490874_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_nividium_hash_72490874" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s002_r003_coe_re_lockbox_rare_hash_52549803_connection" ref="regions">
-        <offset>
-          <position x="-1000000" y="-5000" z="-1000000" />
-        </offset>
-        <macro name="c001_s002_r003_coe_re_lockbox_rare_hash_52549803_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_lockbox_rare_hash_52549803" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="coe_SE_c001_s003_connection" ref="sectors">
-        <offset>
-          <position x="1000000" y="0" z="0" />
-        </offset>
-        <macro ref="coe_SE_c001_s003_macro" connection="cluster" />
-      </connection>
-      <connection name="c001_s003_r001_coe_re_gases_hash_16358208_connection" ref="regions">
-        <offset>
-          <position x="1010526" y="-20000" z="-71053" />
-        </offset>
-        <macro name="c001_s003_r001_coe_re_gases_hash_16358208_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_gases_hash_16358208" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s003_r002_coe_re_minerals_hash_48613123_connection" ref="regions">
-        <offset>
-          <position x="1144737" y="-10000" z="-26316" />
-        </offset>
-        <macro name="c001_s003_r002_coe_re_minerals_hash_48613123_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_minerals_hash_48613123" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s003_r003_coe_re_nividium_hash_72490874_connection" ref="regions">
-        <offset>
-          <position x="1000000" y="-10000" z="0" />
-        </offset>
-        <macro name="c001_s003_r003_coe_re_nividium_hash_72490874_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_nividium_hash_72490874" />
-          </properties>
-        </macro>
-      </connection>
-      <connection name="c001_s003_r004_coe_re_lockbox_extra_hash_53165036_connection" ref="regions">
-        <offset>
-          <position x="1018421" y="-5000" z="157895" />
-        </offset>
-        <macro name="c001_s003_r004_coe_re_lockbox_extra_hash_53165036_macro">
-          <component connection="cluster" ref="standardregion" />
-          <properties>
-            <region ref="coe_re_lockbox_extra_hash_53165036" />
-          </properties>
-        </macro>
-      </connection>
       <connection ref="content">
         <macro>
-          <component connection="space" ref="Cluster_01" />
+          <component connection="space" ref="Cluster_02" />
         </macro>
       </connection>
     </connections>
@@ -143,13 +21,58 @@
     <connections>
       <connection name="coe_SE_c002_s001_connection" ref="sectors">
         <offset>
-          <position x="0" y="0" z="0" />
+          <position x="-1000000" y="0" z="1000000" />
         </offset>
         <macro ref="coe_SE_c002_s001_macro" connection="cluster" />
       </connection>
+      <connection name="c002_s001_r001_coe_re_resouces_hash_33249715_connection" ref="regions">
+        <offset>
+          <position x="-1000000" y="-5000" z="1000000" />
+        </offset>
+        <macro name="c002_s001_r001_coe_re_resouces_hash_33249715_macro">
+          <component connection="cluster" ref="standardregion" />
+          <properties>
+            <region ref="coe_re_resouces_hash_33249715" />
+          </properties>
+        </macro>
+      </connection>
+      <connection name="coe_SE_c002_s002_connection" ref="sectors">
+        <offset>
+          <position x="-1000000" y="0" z="-1000000" />
+        </offset>
+        <macro ref="coe_SE_c002_s002_macro" connection="cluster" />
+      </connection>
+      <connection name="c002_s002_r001_coe_re_scrap_hash_75726667_connection" ref="regions">
+        <offset>
+          <position x="-1028947" y="-10000" z="-1013158" />
+        </offset>
+        <macro name="c002_s002_r001_coe_re_scrap_hash_75726667_macro">
+          <component connection="cluster" ref="standardregion" />
+          <properties>
+            <region ref="coe_re_scrap_hash_75726667" />
+          </properties>
+        </macro>
+      </connection>
+      <connection name="coe_SE_c002_s003_connection" ref="sectors">
+        <offset>
+          <position x="1000000" y="0" z="0" />
+        </offset>
+        <macro ref="coe_SE_c002_s003_macro" connection="cluster" />
+      </connection>
+      <connection name="c002_s003_r001_coe_re_resoucesmain_hash_33249715_connection" ref="regions">
+        <offset>
+          <position x="1000000" y="-10000" z="0" />
+        </offset>
+        <macro name="c002_s003_r001_coe_re_resoucesmain_hash_33249715_macro">
+          <component connection="cluster" ref="standardregion" />
+          <properties>
+            <region ref="coe_re_resoucesmain_hash_33249715" />
+          </properties>
+        </macro>
+      </connection>
       <connection ref="content">
         <macro>
-          <component connection="space" ref="Cluster_02" />
+          <component connection="space" ref="Cluster_01" />
         </macro>
       </connection>
     </connections>

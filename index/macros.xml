@@ -3,4 +3,5 @@
   <entry name="coe_CL_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_clusters" />
   <entry name="coe_SE_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_sectors" />
   <entry name="coe_ZO_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_zones" />
+  <entry name="coe_ZOH_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_zonehighways" />
 </index>

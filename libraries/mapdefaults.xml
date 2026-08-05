@@ -4,17 +4,28 @@
     <dataset macro="coe_CL_c001_macro">
       <properties>
         <identification name="{87466964,1}" description="{87466964,2}" image="enc_cluster01" />
-        <sounds>
-          <music ref="music_soundtrack_argon" />
-        </sounds>
-        <area sunlight="1.4" economy="0.75" security="0.75" factionlogic="false" />
+        <area factionlogic="true" />
+        <system />
+      </properties>
+    </dataset>
+    <dataset macro="coe_SE_c001_s001_macro">
+      <properties>
+        <identification name="{87466964,3}" description="{87466964,4}" image="enc_cluster01" />
+        <area sunlight="1.2" economy="1.0" security="1.0" tags="allowrandomanomaly" />
+        <system />
+      </properties>
+    </dataset>
+    <dataset macro="coe_CL_c002_macro">
+      <properties>
+        <identification name="{87466964,5}" description="{87466964,6}" image="enc_cluster01" />
+        <area factionlogic="false" />
         <system>
           <space environment="{1042,12041}(Asteroids)" />
           <suns>
             <sun class="{1042,13041}(White Dwarf)" />
           </suns>
           <planets>
-            <planet name="{87466965,140001}" class="{1042,14101}(Earth Analog)"
+            <planet name="{87466965,1}" class="{1042,14101}(Earth Analog)"
               geology="{1042,15131}(Forest)" atmosphere="{1042,11071}(Nitrogen/Oxygen)"
               population="{1042,10011}(None)" maxpopulation="37500000000"
               settlements="{1042,16051}(Densely Populated)" part="planet001c">
@@ -28,92 +39,63 @@
         </system>
       </properties>
     </dataset>
-    <dataset macro="coe_SE_c001_s001_macro">
+    <dataset macro="coe_SE_c002_s001_macro">
       <properties>
-        <identification name="{87466964,3}" description="{87466964,2}" />
+        <identification name="{87466964,7}" description="{87466964,8}" image="enc_cluster01" />
         <resourceareas>
-          <resourcearea amount="1" ref="sphere_large_nividium_verylow_slow" />
+          <resourcearea amount="3" ref="sphere_large_helium_high_average" />
+          <resourcearea amount="2" ref="sphere_medium_helium_medium_veryfast" />
+          <resourcearea amount="3" ref="sphere_large_hydrogen_high_average" />
+          <resourcearea amount="2" ref="sphere_medium_hydrogen_medium_veryfast" />
+          <resourcearea amount="3" ref="sphere_large_methane_high_average" />
+          <resourcearea amount="2" ref="sphere_medium_methane_medium_veryfast" />
+          <resourcearea amount="3" ref="sphere_large_ore_high_average" />
+          <resourcearea amount="2" ref="sphere_medium_ore_medium_veryfast" />
+          <resourcearea amount="3" ref="sphere_large_silicon_high_average" />
+          <resourcearea amount="2" ref="sphere_medium_silicon_medium_veryfast" />
+          <resourcearea amount="3" ref="sphere_large_ice_high_average" />
+          <resourcearea amount="2" ref="sphere_medium_ice_medium_veryfast" />
           <resourcearea amount="1" ref="sphere_medium_nividium_low_average" />
-          <resourcearea amount="1" ref="sphere_small_nividium_medium_fast" />
-          <resourcearea amount="1" ref="sphere_large_ore_low_slow" />
-          <resourcearea amount="1" ref="sphere_medium_ore_low_average" />
-          <resourcearea amount="2" ref="sphere_small_ore_medium_fast" />
-          <resourcearea amount="1" ref="sphere_large_silicon_low_slow" />
-          <resourcearea amount="1" ref="sphere_medium_silicon_low_average" />
-          <resourcearea amount="2" ref="sphere_small_silicon_medium_fast" />
-          <resourcearea amount="1" ref="sphere_large_ice_low_slow" />
-          <resourcearea amount="1" ref="sphere_medium_ice_low_average" />
-          <resourcearea amount="2" ref="sphere_small_ice_medium_fast" />
-          <resourcearea amount="3" ref="sphere_small_hydrogen_low_fast" />
-          <resourcearea amount="3" ref="sphere_small_helium_low_fast" />
-          <resourcearea amount="3" ref="sphere_small_methane_low_fast" />
         </resourceareas>
-        <area sunlight="1.5" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <area sunlight="2.8" economy="0.8" security="0.8" tags="allowrandomanomaly" />
         <worlds>
           <world part="planet001c" />
         </worlds>
         <system />
       </properties>
     </dataset>
-    <dataset macro="coe_SE_c001_s002_macro">
+    <dataset macro="coe_SE_c002_s002_macro">
       <properties>
-        <identification name="{87466964,4}" description="{87466964,2}" />
+        <identification name="{87466964,9}" description="{87466964,10}" image="enc_cluster01" />
         <resourceareas>
-          <resourcearea amount="3" ref="sphere_large_rawscrap_medium_average" />
-          <resourcearea amount="3" ref="sphere_medium_rawscrap_high_average" />
-          <resourcearea amount="3" ref="sphere_small_rawscrap_veryhigh_fast" />
-          <resourcearea amount="3" ref="sphere_large_nividium_low_slow" />
-          <resourcearea amount="3" ref="sphere_medium_nividium_low_average" />
-          <resourcearea amount="3" ref="sphere_small_nividium_verylow_fast" />
-          <resourcearea amount="4" ref="sphere_large_rawkhaakscrap_low_fast" />
-          <resourcearea amount="3" ref="sphere_medium_rawkhaakscrap_high_average" />
-          <resourcearea amount="3" ref="sphere_small_rawkhaakscrap_veryhigh_fast" />
+          <resourcearea amount="3" ref="sphere_large_rawscrap_high_veryslow" />
+          <resourcearea amount="6" ref="sphere_small_rawscrap_medium_average" />
+          <resourcearea amount="9" ref="sphere_small_rawscrap_low_veryfast" />
+          <resourcearea amount="3" ref="sphere_small_rawkhaakscrap_medium_average" />
         </resourceareas>
-        <area sunlight="1.4" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <area sunlight="1.8" economy="0.8" security="0.8" tags="allowrandomanomaly" />
         <system />
       </properties>
     </dataset>
-    <dataset macro="coe_SE_c001_s003_macro">
+    <dataset macro="coe_SE_c002_s003_macro">
       <properties>
-        <identification name="{87466964,5}" description="{87466964,2}" />
+        <identification name="{87466964,11}" description="{87466964,12}" image="enc_cluster01" />
         <resourceareas>
-          <resourcearea amount="3" ref="sphere_large_hydrogen_veryhigh_average" />
-          <resourcearea amount="3" ref="sphere_large_helium_veryhigh_average" />
-          <resourcearea amount="3" ref="sphere_large_methane_veryhigh_average" />
-          <resourcearea amount="3" ref="sphere_large_nividium_medium_slow" />
-          <resourcearea amount="3" ref="sphere_medium_nividium_medium_average" />
-          <resourcearea amount="3" ref="sphere_small_nividium_medium_fast" />
-          <resourcearea amount="3" ref="sphere_large_ore_veryhigh_slow" />
-          <resourcearea amount="3" ref="sphere_medium_ore_medium_average" />
-          <resourcearea amount="3" ref="sphere_small_ore_high_fast" />
-          <resourcearea amount="3" ref="sphere_large_silicon_veryhigh_slow" />
-          <resourcearea amount="3" ref="sphere_medium_silicon_medium_average" />
-          <resourcearea amount="3" ref="sphere_small_silicon_high_fast" />
-          <resourcearea amount="3" ref="sphere_large_ice_veryhigh_slow" />
-          <resourcearea amount="3" ref="sphere_medium_ice_medium_average" />
-          <resourcearea amount="3" ref="sphere_small_ice_high_fast" />
+          <resourcearea amount="6" ref="sphere_large_helium_veryhigh_average" />
+          <resourcearea amount="4" ref="sphere_medium_helium_high_veryfast" />
+          <resourcearea amount="6" ref="sphere_large_hydrogen_veryhigh_average" />
+          <resourcearea amount="4" ref="sphere_medium_hydrogen_high_veryfast" />
+          <resourcearea amount="6" ref="sphere_large_methane_veryhigh_average" />
+          <resourcearea amount="4" ref="sphere_medium_methane_high_veryfast" />
+          <resourcearea amount="6" ref="sphere_large_ore_veryhigh_average" />
+          <resourcearea amount="4" ref="sphere_medium_ore_high_veryfast" />
+          <resourcearea amount="6" ref="sphere_large_silicon_veryhigh_average" />
+          <resourcearea amount="4" ref="sphere_medium_silicon_high_veryfast" />
+          <resourcearea amount="6" ref="sphere_large_ice_veryhigh_average" />
+          <resourcearea amount="4" ref="sphere_medium_ice_veryhigh_veryfast" />
+          <resourcearea amount="2" ref="sphere_medium_nividium_medium_average" />
         </resourceareas>
-        <area sunlight="1.3" economy="0.8" security="0.8" tags="allowrandomanomaly" />
-        <system />
-      </properties>
-    </dataset>
-    <dataset macro="coe_CL_c002_macro">
-      <properties>
-        <identification name="{87466964,6}" description="{87466964,7}" image="enc_cluster01" />
-        <sounds>
-          <music ref="music_soundtrack_argon" />
-        </sounds>
-        <area factionlogic="false" />
-        <system />
-      </properties>
-    </dataset>
-    <dataset macro="coe_SE_c002_s001_macro">
-      <properties>
-        <identification name="{87466964,6}" description="{87466964,7}" image="enc_cluster01" />
-        <resourceareas>
-          <resourcearea amount="1" ref="sphere_small_hydrogen_low_fast" />
-        </resourceareas>
-        <area sunlight="0.1" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <area sunlight="2.0" economy="0.8" security="0.8" tags="allowrandomanomaly" />
         <system />
       </properties>
     </dataset>

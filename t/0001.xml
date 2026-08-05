@@ -1,18 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <language>
-  <page id="87466964" title="The Cradle of Empire texts" descr="" voice="no">
-    <t id="1">The Cradle of Empire</t>
-    <t id="2">This is a cluster of sectors where a powerful empire is destined to emerge</t>
-    <t id="3">The Emperor's Throne</t>
-    <t id="4">The Emperor's Wrath</t>
-    <t id="5">The Emperor's Joy</t>
-    <t id="6">The Imperial Sreach</t>
-    <t id="7"></t>
+  <page id="87466964" title="coe T Files" descr="" voice="yes">
+    <t id="1">The Imperial Sreach</t>
+    <t id="2"></t>
+    <t id="3">The Imperial Sreach</t>
+    <t id="4"></t>
+    <t id="5">The Cradle of Empire</t>
+    <t id="6"></t>
+    <t id="7">The Emperor's Throne</t>
+    <t id="8"></t>
+    <t id="9">The Emperor's Wrath</t>
+    <t id="10"></t>
+    <t id="11">The Emperor's Joy</t>
+    <t id="12"></t>
   </page>
-  <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="no">
-    <t id="140001">{87466966,1001}(Empire Prime)</t>
+  <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="yes">
+    <t id="1">{87466966,1}(Империя Прайм)</t>
   </page>
-  <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="no">
-    <t id="1001">{Empire Prime}</t>
+  <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="yes">
+    <t id="1">Империя Прайм</t>
   </page>
 </language>
