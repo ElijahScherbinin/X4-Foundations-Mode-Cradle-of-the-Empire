@@ -3,21 +3,21 @@
   <add sel="/defaults">
     <dataset macro="coe_CL_c001_macro">
       <properties>
-        <identification name="{87466964,1}" description="{87466964,2}" image="enc_cluster01" />
+        <identification name="{87466964,87001}" description="{87466964,87002}" image="enc_cluster01" />
         <area factionlogic="false" />
         <system />
       </properties>
     </dataset>
     <dataset macro="coe_SE_c001_s001_macro">
       <properties>
-        <identification name="{87466964,3}" description="{87466964,4}" image="enc_cluster01" />
+        <identification name="{87466964,87003}" description="{87466964,87004}" image="enc_cluster01" />
         <area sunlight="1.2" economy="1.0" security="1.0" tags="allowrandomanomaly" />
         <system />
       </properties>
     </dataset>
     <dataset macro="coe_CL_c002_macro">
       <properties>
-        <identification name="{87466964,5}" description="{87466964,6}" image="enc_cluster01" />
+        <identification name="{87466964,87005}" description="{87466964,87006}" image="enc_cluster01" />
         <area factionlogic="false" />
         <system>
           <space environment="{1042,12041}(Asteroids)" />
@@ -41,7 +41,7 @@
     </dataset>
     <dataset macro="coe_SE_c002_s001_macro">
       <properties>
-        <identification name="{87466964,7}" description="{87466964,8}" image="enc_cluster01" />
+        <identification name="{87466964,87007}" description="{87466964,87008}" image="enc_cluster01" />
         <resourceareas>
           <resourcearea amount="3" ref="sphere_large_helium_high_average" />
           <resourcearea amount="2" ref="sphere_medium_helium_medium_veryfast" />
@@ -66,7 +66,7 @@
     </dataset>
     <dataset macro="coe_SE_c002_s002_macro">
       <properties>
-        <identification name="{87466964,9}" description="{87466964,10}" image="enc_cluster01" />
+        <identification name="{87466964,87009}" description="{87466964,87010}" image="enc_cluster01" />
         <resourceareas>
           <resourcearea amount="3" ref="sphere_large_rawscrap_high_veryslow" />
           <resourcearea amount="6" ref="sphere_small_rawscrap_medium_average" />
@@ -79,7 +79,7 @@
     </dataset>
     <dataset macro="coe_SE_c002_s003_macro">
       <properties>
-        <identification name="{87466964,11}" description="{87466964,12}" image="enc_cluster01" />
+        <identification name="{87466964,87011}" description="{87466964,87012}" image="enc_cluster01" />
         <resourceareas>
           <resourcearea amount="6" ref="sphere_large_helium_veryhigh_average" />
           <resourcearea amount="4" ref="sphere_medium_helium_high_veryfast" />
