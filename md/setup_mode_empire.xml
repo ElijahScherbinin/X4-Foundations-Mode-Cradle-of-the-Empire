@@ -1,26 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mdscript name="Setup_Mod_Empire" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="md.xsd">
   <cues>
-    <!-- Добавляем сейф в центр сектора Имперский Предел-->
-    <cue name="Spawn_Lockbox_The_Imperial_Sreach">
+    <cue name="Give_Argon_Base_Blueprints_Kitstarter" instantiate="true">
+      <conditions>
+        <event_cue_signalled />
+      </conditions>
+      <actions>
+        <!-- Чертеж: Аргонская арочкая соединительная конструкция 01 -->
+        <add_blueprints wares="ware.module_arg_conn_arc_01" />
+        <!-- Чертеж: Аргонская базовая соединительная конструкция 01 -->
+        <add_blueprints wares="ware.module_arg_conn_base_01" />
+        <!-- Чертеж: Аргонская крестовая соединительная конструкция 01 -->
+        <add_blueprints wares="ware.module_arg_conn_cross_01" />
+        <!-- Чертеж: Аргонская вентикальная соединительная конструкция 01 -->
+        <add_blueprints wares="ware.module_arg_conn_vertical_01" />
+        <!-- Чертеж: 3M6S Базовая Посадочная площадка -->
+        <add_blueprints wares="ware.module_arg_dock_m_02_lowtech" />
+        <!-- Чертеж: Аргонский 3-Док Е Причал -->
+        <add_blueprints wares="ware.module_arg_pier_l_03" />
+      </actions>
+    </cue>
+    <cue name="Give_Argon_Defence_Blueprints_Kitstarter" instantiate="true">
+      <conditions>
+        <event_cue_signalled />
+      </conditions>
+      <actions>
+        <!-- Чертеж: Аргонский административный центр -->
+        <add_blueprints wares="ware.module_arg_def_claim_01" />
+        <!-- Чертеж: Аргонская дисковая защитная платформа -->
+        <add_blueprints wares="ware.module_arg_def_disc_01" />
+        <!-- Чертеж: Аргонская мостовая защитная платформа -->
+        <add_blueprints wares="ware.module_arg_def_tube_01" />
+        <!-- Чертеж: Аргонская L импульсная турель Мк1 -->
+        <add_blueprints wares="ware.turret_arg_l_laser_01_mk1" />
+        <!-- Чертеж: Аргонский L Генератор щитов Мк2 -->
+        <add_blueprints wares="ware.shield_arg_l_standard_01_mk2" />
+        <!-- Чертеж: Аргонская M импульсная турель Мк1 -->
+        <add_blueprints wares="ware.turret_arg_m_laser_01_mk1" />
+        <!-- Чертеж: Аргонский M Генератор щитов Мк2 -->
+        <add_blueprints wares="ware.shield_arg_m_standard_01_mk2" />
+      </actions>
+    </cue>
+    <cue name="Give_Argon_Trade_Blueprints_Kitstarter" instantiate="true">
+      <conditions>
+        <event_cue_signalled />
+      </conditions>
+      <actions>
+        <!-- Чертеж: Аргонская арочкая соединительная конструкция 02 -->
+        <add_blueprints wares="ware.module_conn_arg_antigonearc_01" />
+        <!-- Чертеж: Аргон L Хранилище контейнеров -->
+        <add_blueprints wares="ware.module_arg_stor_container_l_01" />
+        <!-- Чертеж: Аргонский 1-Док Причал -->
+        <add_blueprints wares="ware.module_arg_pier_l_02" />
+      </actions>
+    </cue>
+    <cue name="Give_Argon_Factory_Blueprints_Kitstarter" instantiate="true">
+      <conditions>
+        <event_cue_signalled />
+      </conditions>
+      <actions>
+        <!-- Чертеж: Производство энергоэлементов -->
+        <add_blueprints wares="ware.module_gen_prod_energycells_01" />
+        <!-- Чертеж: Аргон M Хранилище контейнеров -->
+        <add_blueprints wares="ware.module_arg_stor_container_m_01" />
+        <!-- Чертеж: Аргон M Хранилище жидкостей -->
+        <add_blueprints wares="ware.module_arg_stor_liquid_m_01" />
+        <!-- Чертеж: Аргон M Хранилище твердых грузов -->
+        <add_blueprints wares="ware.module_arg_stor_solid_m_01" />
+        <!-- Чертеж: Аргонский M Ареал -->
+        <add_blueprints wares="ware.module_arg_hab_m_01" />
+        <!-- Чертеж: Аргонский S Ареал -->
+        <add_blueprints wares="ware.module_arg_hab_s_01" />
+      </actions>
+    </cue>
+    <!-- ship_arg_l_trans_container_03_a_macro - Инкаркатура Защитник -->
+    <cue name="Spawn_Ship_The_Imperial_Sreach">
       <conditions>
         <event_universe_generated />
       </conditions>
       <actions>
-        <!-- Поиск сектора coe_SE_c001_s001_macro (Имперский Предел) -->
-        <find_sector name="$TargetSector" macro="macro.coe_SE_c001_s001_macro" space="player.galaxy" required="true"/>
+        <!-- Находим земной сектор -->
+        <find_sector name="$TargetSector" macro="macro.coe_SE_c001_s001_macro" space="player.galaxy" required="true" />
         <do_if value="$TargetSector.exists">
-          <!-- Создаем точные координаты базовой точки размещения (в метрах) -->
-          <create_position name="$Placement" space="$TargetSector" x="0m" y="0m" z="0m"/>
-          <!-- Создаем сейф с безопасным радиусом спавна 300 метров от точки -->
-          <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$TargetSector" owner="faction.ownerless">
-            <safepos value="$Placement" max="300m"/>
+          <!-- Координаты размещения корабля -->
+          <create_position name="$ShipPlacement" space="$TargetSector" x="0m" y="-10000m" z="0m" />
+          <!-- Создание корабля -->
+          <create_ship name="$Ship" macro="macro.ship_arg_l_trans_container_03_a_macro" sector="$TargetSector" commandeerable="false" capturable="true">
+            <owner exact="faction.ownerless" />
+            <safepos value="$ShipPlacement" max="10000m" />
+          </create_ship>
+          <!-- Безопасное удаление пилота, если он сгенерировался -->
+          <do_if value="$Ship.pilot.exists">
+            <destroy_object object="$Ship.pilot" />
+          </do_if>
+          <!-- Настраиваем сильные повреждения корпуса и нулевые щиты -->
+          <set_object_hull object="$Ship" min="40" max="75" />
+          <set_object_shield object="$Ship" exact="0" />
+          <!-- Создаем контейнер с безопасным радиусом спавна 10000 метров от корабля -->
+          <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$Ship.sector">
+            <safepos value="$Ship.position" max="10000m" />
           </create_lockbox>
-          <!-- Защищаем сейф от случайного взрыва (прочность корпуса заблокирована на 100%) -->
+          <!-- Защищаем контейнер от случайного взрыва (прочность корпуса заблокирована на 100%) -->
           <set_object_min_hull object="$Lockbox" exact="100" />
           <!-- Наполняем ценным лутом -->
-          <add_cargo object="$Lockbox" ware="ware.inv_seminar_piloting_4" exact="2"/>
-          <add_cargo object="$Lockbox" ware="ware.inv_seminar_management_4" exact="2"/>
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_piloting_4" exact="2" />
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_management_4" exact="2" />
         </do_if>
       </actions>
       <cues>
@@ -28,59 +112,161 @@
         <cue name="Spawn_Lockbox_The_Imperial_Sreach_Collected">
           <conditions>
             <!-- Срабатывает, когда замки отстрелены и контейнеры выпали -->
-            <event_object_dropped_objects object="$Lockbox"/>
+            <event_object_dropped_objects object="$Lockbox" />
           </conditions>
           <actions>
-            <!-- Чертеж: Аргонская базовая соединительная конструкция 01 -->
-            <add_blueprints wares="ware.module_arg_conn_base_01"/>
-            <!-- Чертеж: Аргонская крестовая соединительная конструкция 01 -->
-            <add_blueprints wares="ware.module_arg_conn_cross_01"/>
-            <!-- Чертеж: Аргонская вентикальная соединительная конструкция 01 -->
-            <add_blueprints wares="ware.module_arg_conn_vertical_01"/>
-
-            <!-- Чертеж: Аргонская арочкая соединительная конструкция 01 -->
-            <add_blueprints wares="ware.module_conn_arg_antigonearc_01"/>
-            <!-- Чертеж: Аргонская арочкая соединительная конструкция 02 -->
-            <add_blueprints wares="ware.module_arg_conn_arc_01"/>
-
-            <!-- Чертеж: 3M6S Базовая Посадочная площадка -->
-            <add_blueprints wares="ware.module_arg_dock_m_02_lowtech"/>
-            <!-- Чертеж: Аргонский 1-Док Причал -->
-            <add_blueprints wares="ware.module_arg_pier_l_02"/>
-            <!-- Чертеж: Аргонский 3-Док Е Причал -->
-            <add_blueprints wares="ware.module_arg_pier_l_03"/>
-
-            <!-- Чертеж: Аргонский S Ареал -->
-            <add_blueprints wares="ware.module_arg_hab_s_01"/>
-
-            <!-- Чертеж: Аргон L Хранилище контейнеров -->
-            <add_blueprints wares="ware.module_arg_stor_container_l_01"/>
-            <!-- Чертеж: Аргон M Хранилище контейнеров -->
-            <add_blueprints wares="ware.module_arg_stor_container_m_01"/>
-            <!-- Чертеж: Аргон M Хранилище жидкостей -->
-            <add_blueprints wares="ware.module_arg_stor_liquid_m_01"/>
-            <!-- Чертеж: Аргон M Хранилище твердых грузов -->
-            <add_blueprints wares="ware.module_arg_stor_solid_m_01"/>
-
-            <!-- Чертеж: Аргонский административный центр -->
-            <add_blueprints wares="ware.module_arg_def_claim_01"/>
-            <!-- Чертеж: Аргонская дисковая защитная платформа -->
-            <add_blueprints wares="ware.module_arg_def_disc_01"/>
-            <!-- Чертеж: Аргонская мостовая защитная платформа -->
-            <add_blueprints wares="ware.module_arg_def_tube_01"/>
-
-            <!-- Чертеж: Аргонская L импульсная турель Мк1 -->
-            <add_blueprints wares="ware.turret_arg_l_laser_01_mk1"/>
-            <!-- Чертеж: Аргонский L Генератор щитов Мк2 -->
-            <add_blueprints wares="ware.shield_arg_l_standard_01_mk2"/>
-            <!-- Чертеж: Аргонская M импульсная турель Мк1 -->
-            <add_blueprints wares="ware.turret_arg_m_laser_01_mk1"/>
-            <!-- Чертеж: Аргонский M Генератор щитов Мк2 -->
-            <add_blueprints wares="ware.shield_arg_m_standard_01_mk2"/>
-
-            <!-- Чертеж: Производство энергоэлементов -->
-            <add_blueprints wares="ware.module_gen_prod_energycells_01"/>
-
+            <signal_cue cue="Give_Argon_Base_Blueprints_Kitstarter" />
+            <signal_cue cue="Give_Argon_Trade_Blueprints_Kitstarter" />
+            <!-- Снимаем бессмертие с сейфа -->
+            <set_object_min_hull object="$Lockbox" exact="0" />
+          </actions>
+        </cue>
+      </cues>
+    </cue>
+    <!-- ship_arg_l_miner_liquid_01_a_macro - Магнетар (Газ) Защитник -->
+    <cue name="Spawn_Ship_The_Emperors_Throne">
+      <conditions>
+        <event_universe_generated />
+      </conditions>
+      <actions>
+        <!-- Находим земной сектор -->
+        <find_sector name="$TargetSector" macro="macro.coe_SE_c002_s001_macro" space="player.galaxy" required="true" />
+        <do_if value="$TargetSector.exists">
+          <!-- Координаты размещения корабля -->
+          <create_position name="$ShipPlacement" space="$TargetSector" x="0m" y="-10000m" z="0m" />
+          <!-- Создание корабля -->
+          <create_ship name="$Ship" macro="macro.ship_arg_l_miner_liquid_01_a_macro" sector="$TargetSector" commandeerable="false" capturable="true">
+            <owner exact="faction.ownerless" />
+            <safepos value="$ShipPlacement" max="10000m" />
+          </create_ship>
+          <!-- Безопасное удаление пилота, если он сгенерировался -->
+          <do_if value="$Ship.pilot.exists">
+            <destroy_object object="$Ship.pilot" />
+          </do_if>
+          <!-- Настраиваем сильные повреждения корпуса и нулевые щиты -->
+          <set_object_hull object="$Ship" min="40" max="75" />
+          <set_object_shield object="$Ship" exact="0" />
+          <!-- Создаем контейнер с безопасным радиусом спавна 10000 метров от корабля -->
+          <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$Ship.sector">
+            <safepos value="$Ship.position" max="10000m" />
+          </create_lockbox>
+          <!-- Защищаем контейнер от случайного взрыва (прочность корпуса заблокирована на 100%) -->
+          <set_object_min_hull object="$Lockbox" exact="100" />
+          <!-- Наполняем ценным лутом -->
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_piloting_4" exact="2" />
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_management_4" exact="2" />
+        </do_if>
+      </actions>
+      <cues>
+        <!-- Очередь, отслеживающая сбор лута игроком -->
+        <cue name="Spawn_Lockbox_The_Emperors_Throne_Collected">
+          <conditions>
+            <!-- Срабатывает, когда замки отстрелены и контейнеры выпали -->
+            <event_object_dropped_objects object="$Lockbox" />
+          </conditions>
+          <actions>
+            <signal_cue cue="Give_Argon_Base_Blueprints_Kitstarter" />
+            <signal_cue cue="Give_Argon_Factory_Blueprints_Kitstarter" />
+            <!-- Снимаем бессмертие с сейфа -->
+            <set_object_min_hull object="$Lockbox" exact="0" />
+          </actions>
+        </cue>
+      </cues>
+    </cue>
+    <!-- ship_arg_l_destroyer_01_a_macro - Бегемот: -->
+    <cue name="Spawn_Ship_The_Emperors_Wrath">
+      <conditions>
+        <event_universe_generated />
+      </conditions>
+      <actions>
+        <!-- Находим земной сектор -->
+        <find_sector name="$TargetSector" macro="macro.coe_SE_c002_s002_macro" space="player.galaxy" required="true" />
+        <do_if value="$TargetSector.exists">
+          <!-- Координаты размещения корабля -->
+          <create_position name="$ShipPlacement" space="$TargetSector" x="0m" y="-10000m" z="0m" />
+          <!-- Создание корабля -->
+          <create_ship name="$Ship" macro="macro.ship_arg_l_destroyer_01_a_macro" sector="$TargetSector" commandeerable="false" capturable="true">
+            <owner exact="faction.ownerless" />
+            <safepos value="$ShipPlacement" max="10000m" />
+          </create_ship>
+          <!-- Безопасное удаление пилота, если он сгенерировался -->
+          <do_if value="$Ship.pilot.exists">
+            <destroy_object object="$Ship.pilot" />
+          </do_if>
+          <!-- Настраиваем сильные повреждения корпуса и нулевые щиты -->
+          <set_object_hull object="$Ship" min="40" max="75" />
+          <set_object_shield object="$Ship" exact="0" />
+          <!-- Создаем контейнер с безопасным радиусом спавна 10000 метров от корабля -->
+          <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$Ship.sector">
+            <safepos value="$Ship.position" max="10000m" />
+          </create_lockbox>
+          <!-- Защищаем контейнер от случайного взрыва (прочность корпуса заблокирована на 100%) -->
+          <set_object_min_hull object="$Lockbox" exact="100" />
+          <!-- Наполняем ценным лутом -->
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_piloting_4" exact="2" />
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_management_4" exact="2" />
+        </do_if>
+      </actions>
+      <cues>
+        <!-- Очередь, отслеживающая сбор лута игроком -->
+        <cue name="Spawn_Lockbox_The_Emperors_Wrath_Collected">
+          <conditions>
+            <!-- Срабатывает, когда замки отстрелены и контейнеры выпали -->
+            <event_object_dropped_objects object="$Lockbox" />
+          </conditions>
+          <actions>
+            <signal_cue cue="Give_Argon_Base_Blueprints_Kitstarter" />
+            <signal_cue cue="Give_Argon_Defence_Blueprints_Kitstarter" />
+            <!-- Снимаем бессмертие с сейфа -->
+            <set_object_min_hull object="$Lockbox" exact="0" />
+          </actions>
+        </cue>
+      </cues>
+    </cue>
+    <!-- ship_arg_l_miner_solid_01_a_macro - Магнетар (Минералы) Защитник -->
+    <cue name="Spawn_Ship_The_Emperors_Joy">
+      <conditions>
+        <event_universe_generated />
+      </conditions>
+      <actions>
+        <!-- Находим земной сектор -->
+        <find_sector name="$TargetSector" macro="macro.coe_SE_c002_s003_macro" space="player.galaxy" required="true" />
+        <do_if value="$TargetSector.exists">
+          <!-- Координаты размещения корабля -->
+          <create_position name="$ShipPlacement" space="$TargetSector" x="0m" y="-10000m" z="0m" />
+          <!-- Создание корабля -->
+          <create_ship name="$Ship" macro="macro.ship_arg_l_miner_solid_01_a_macro" sector="$TargetSector" commandeerable="false" capturable="true">
+            <owner exact="faction.ownerless" />
+            <safepos value="$ShipPlacement" max="10000m" />
+          </create_ship>
+          <!-- Безопасное удаление пилота, если он сгенерировался -->
+          <do_if value="$Ship.pilot.exists">
+            <destroy_object object="$Ship.pilot" />
+          </do_if>
+          <!-- Настраиваем сильные повреждения корпуса и нулевые щиты -->
+          <set_object_hull object="$Ship" min="40" max="75" />
+          <set_object_shield object="$Ship" exact="0" />
+          <!-- Создаем контейнер с безопасным радиусом спавна 10000 метров от корабля -->
+          <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$Ship.sector">
+            <safepos value="$Ship.position" max="10000m" />
+          </create_lockbox>
+          <!-- Защищаем контейнер от случайного взрыва (прочность корпуса заблокирована на 100%) -->
+          <set_object_min_hull object="$Lockbox" exact="100" />
+          <!-- Наполняем ценным лутом -->
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_piloting_4" exact="2" />
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_management_4" exact="2" />
+        </do_if>
+      </actions>
+      <cues>
+        <!-- Очередь, отслеживающая сбор лута игроком -->
+        <cue name="Spawn_Lockbox_The_Emperors_Joy_Collected">
+          <conditions>
+            <!-- Срабатывает, когда замки отстрелены и контейнеры выпали -->
+            <event_object_dropped_objects object="$Lockbox" />
+          </conditions>
+          <actions>
+            <signal_cue cue="Give_Argon_Base_Blueprints_Kitstarter" />
+            <signal_cue cue="Give_Argon_Factory_Blueprints_Kitstarter" />
             <!-- Снимаем бессмертие с сейфа -->
             <set_object_min_hull object="$Lockbox" exact="0" />
           </actions>

@@ -15,9 +15,9 @@
     <t id="12"></t>
   </page>
   <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="yes">
-    <t id="1">{87466966,1}(Империя Прайм)</t>
+    <t id="1">{87466966,1}(Empire Prime)</t>
   </page>
   <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="yes">
-    <t id="1">Империя Прайм</t>
+    <t id="1">Empire Prime</t>
   </page>
 </language>
