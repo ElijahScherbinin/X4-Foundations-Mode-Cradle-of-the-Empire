@@ -4,7 +4,7 @@
     <dataset macro="coe_CL_c001_macro">
       <properties>
         <identification name="{87466964,1}" description="{87466964,2}" image="enc_cluster01" />
-        <area factionlogic="true" />
+        <area factionlogic="false" />
         <system />
       </properties>
     </dataset>

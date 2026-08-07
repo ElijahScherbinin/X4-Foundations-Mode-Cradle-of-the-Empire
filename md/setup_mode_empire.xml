@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="My_Lockbox_Mod_Script" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="md.xsd">
+  <cues>
+    <!-- Добавляем сейф в центр сектора Имперский Предел-->
+    <cue name="Spawn_Lockbox_The_Imperial_Sreach">
+      <conditions>
+        <event_universe_generated />
+      </conditions>
+      <actions>
+        <!-- Поиск сектора coe_SE_c001_s001_macro (Имперский Предел) -->
+        <find_sector name="$TargetSector" macro="macro.coe_SE_c001_s001_macro" space="player.galaxy" required="true"/>
+        <do_if value="$TargetSector.exists">
+          <!-- Создаем точные координаты базовой точки размещения (в метрах) -->
+          <create_position name="$Placement" space="$TargetSector" x="0m" y="0m" z="0m"/>
+          <!-- Создаем сейф с безопасным радиусом спавна 300 метров от точки -->
+          <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$TargetSector" owner="faction.ownerless">
+            <safepos value="$Placement" max="300m"/>
+          </create_lockbox>
+          <!-- Защищаем сейф от случайного взрыва (прочность корпуса заблокирована на 100%) -->
+          <set_object_min_hull object="$Lockbox" exact="100" />
+          <!-- Наполняем ценным лутом -->
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_piloting_4" exact="2"/>
+          <add_cargo object="$Lockbox" ware="ware.inv_seminar_management_4" exact="2"/>
+        </do_if>
+      </actions>
+      <cues>
+        <!-- Очередь, отслеживающая сбор лута игроком -->
+        <cue name="My_Lockbox_Collected">
+          <conditions>
+            <!-- Срабатывает, когда замки отстрелены и контейнеры выпали -->
+            <event_object_dropped_objects object="$Lockbox"/>
+          </conditions>
+          <actions>
+            <!-- Чертеж: Аргонская базовая соединительная конструкция 01 -->
+            <add_blueprints wares="ware.module_arg_conn_base_01"/>
+            <!-- Чертеж: Аргонская крестовая соединительная конструкция 01 -->
+            <add_blueprints wares="ware.module_arg_conn_cross_01"/>
+            <!-- Чертеж: Аргонская вентикальная соединительная конструкция 01 -->
+            <add_blueprints wares="ware.module_arg_conn_vertical_01"/>
+
+            <!-- Чертеж: Аргонская арочкая соединительная конструкция 01 -->
+            <add_blueprints wares="ware.module_conn_arg_antigonearc_01"/>
+            <!-- Чертеж: Аргонская арочкая соединительная конструкция 02 -->
+            <add_blueprints wares="ware.module_arg_conn_arc_01"/>
+
+            <!-- Чертеж: 3M6S Базовая Посадочная площадка -->
+            <add_blueprints wares="ware.module_arg_dock_m_02_lowtech"/>
+            <!-- Чертеж: Аргонский 1-Док Причал -->
+            <add_blueprints wares="ware.module_arg_pier_l_02"/>
+            <!-- Чертеж: Аргонский 3-Док Е Причал -->
+            <add_blueprints wares="ware.module_arg_pier_l_03"/>
+
+            <!-- Чертеж: Аргонский S Ареал -->
+            <add_blueprints wares="ware.module_arg_hab_s_01"/>
+
+            <!-- Чертеж: Аргон L Хранилище контейнеров -->
+            <add_blueprints wares="ware.module_arg_stor_container_l_01"/>
+            <!-- Чертеж: Аргон M Хранилище контейнеров -->
+            <add_blueprints wares="ware.module_arg_stor_container_m_01"/>
+            <!-- Чертеж: Аргон M Хранилище жидкостей -->
+            <add_blueprints wares="ware.module_arg_stor_liquid_m_01"/>
+            <!-- Чертеж: Аргон M Хранилище твердых грузов -->
+            <add_blueprints wares="ware.module_arg_stor_solid_m_01"/>
+
+            <!-- Чертеж: Аргонский административный центр -->
+            <add_blueprints wares="ware.module_arg_def_claim_01"/>
+            <!-- Чертеж: Аргонская дисковая защитная платформа -->
+            <add_blueprints wares="ware.module_arg_def_disc_01"/>
+            <!-- Чертеж: Аргонская мостовая защитная платформа -->
+            <add_blueprints wares="ware.module_arg_def_tube_01"/>
+
+            <!-- Чертеж: Аргонская L импульсная турель Мк1 -->
+            <add_blueprints wares="ware.turret_arg_l_laser_01_mk1"/>
+            <!-- Чертеж: Аргонский L Генератор щитов Мк2 -->
+            <add_blueprints wares="ware.shield_arg_l_standard_01_mk2"/>
+            <!-- Чертеж: Аргонская M импульсная турель Мк1 -->
+            <add_blueprints wares="ware.turret_arg_m_laser_01_mk1"/>
+            <!-- Чертеж: Аргонский M Генератор щитов Мк2 -->
+            <add_blueprints wares="ware.shield_arg_m_standard_01_mk2"/>
+
+            <!-- Чертеж: Производство энергоэлементов -->
+            <add_blueprints wares="ware.module_gen_prod_energycells_01"/>
+
+            <!-- Снимаем бессмертие с сейфа -->
+            <set_object_min_hull object="$Lockbox" exact="0" />
+          </actions>
+        </cue>
+      </cues>
+    </cue>
+  </cues>
+</mdscript>
