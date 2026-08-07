@@ -1,4 +1,4 @@
-# The Cradle of the Empire — Мод для X⁴: Foundations
+# The Cradle of the Empire — Мод для X4: Foundations
 
 ## 📜 Лор мода
 
