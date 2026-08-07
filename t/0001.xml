@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <language>
   <page id="87466964" title="coe T Files" descr="" voice="yes">
-    <t id="1">The Imperial Sreach</t>
-    <t id="2"></t>
-    <t id="3">The Imperial Sreach</t>
-    <t id="4"></t>
-    <t id="5">The Cradle of Empire</t>
-    <t id="6"></t>
-    <t id="7">The Emperor's Throne</t>
-    <t id="8"></t>
-    <t id="9">The Emperor's Wrath</t>
-    <t id="10"></t>
-    <t id="11">The Emperor's Joy</t>
-    <t id="12"></t>
+    <t id="1">Imperial Reach</t>
+    <t id="2">A strategic transport artery between Argon and Antigona. There are no resources here: the sector’s value lies in its connectivity. The lack of infrastructure makes it an ideal site for the first large-scale construction: you can build trade hubs and support docks to take control of the galaxy’s key routes.</t>
+    <t id="3">{87466964, 1}</t>
+    <t id="4">{87466964, 2}</t>
+    <t id="5">Cradle of the Empire</t>
+    <t id="6">A promising cluster intended to become the core of a new Argon power. The territory is closed to other factions to allow for independent development. Currently, there is no developed infrastructure — only the planet, resources, and ambition. It is up to the player to build the first stations here, establish production, and create a fully functional imperial economy.</t>
+    <t id="7">Emperor’s Throne</t>
+    <t id="8">A promising sector for establishing an administrative and command center. There are enough resources for initial construction, but there is no infrastructure. You can build the first control nodes, shipyards, and docks here to turn the sector into the heart of imperial power.</t>
+    <t id="9">Emperor’s Wrath</t>
+    <t id="10">A specialized sector rich in debris from ships and stations left over after heavy battles with the Xenon, Haaki, and other races. The sector is ideal for rapidly building up military and industrial capacity, but it requires serious protection.</t>
+    <t id="11">Emperor’s Joy</t>
+    <t id="12">A sector with vast reserves of raw materials waiting to be developed. There is no infrastructure, but the potential is enormous. You can set up large-scale mining and processing facilities here to form the economic backbone of the future Empire. However, the sector is also attractive to competitors, so construction will require protection.</t>
   </page>
   <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="yes">
-    <t id="1">{87466966,1}(Empire Prime)</t>
+    <t id="1">{87466966,1}(Aegis)</t>
   </page>
   <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="yes">
-    <t id="1">Empire Prime</t>
+    <t id="1">Aegis</t>
   </page>
 </language>
