@@ -6,7 +6,7 @@
     <t id="87003">{87466964, 87001}</t>
     <t id="87004">{87466964, 87002}</t>
     <t id="87005">Cradle of the Empire</t>
-    <t id="87006">A promising cluster intended to become the core of a new Argon power. The territory is closed to other factions to allow for independent development. Currently, there is no developed infrastructure — only the planet, resources, and ambition. It is up to the player to build the first stations here, establish production, and create a fully functional imperial economy.</t>
+    <t id="87006">A promising cluster intended to become the core of a new Argon power. The territory is closed to other factions to allow for independent development. Currently, there is no developed infrastructure — only the planet, luna, resources, and ambition. It is up to the player to build the first stations here, establish production, and create a fully functional imperial economy.</t>
     <t id="87007">Emperor’s Throne</t>
     <t id="87008">A promising sector for establishing an administrative and command center. There are enough resources for initial construction, but there is no infrastructure. You can build the first control nodes, shipyards, and docks here to turn the sector into the heart of imperial power.</t>
     <t id="87009">Emperor’s Wrath</t>
@@ -16,8 +16,10 @@
   </page>
   <page id="87466965" title="Systems" descr="Names and descriptions of systems" voice="yes">
     <t id="1">{87466966,1}(Aegis)</t>
+    <t id="2">{87466966,2}(Luna)</t>
   </page>
   <page id="87466966" title="Location Name Pool" descr="Pool of names for use in systems and sectors" voice="yes">
     <t id="1">Aegis</t>
+    <t id="2">Luna</t>
   </page>
 </language>

@@ -25,14 +25,16 @@
             <sun class="{1042,13041}(White Dwarf)" />
           </suns>
           <planets>
-            <planet name="{87466965,1}" class="{1042,14101}(Earth Analog)"
+            <planet name="{87466965,1}(Aegis)" class="{1042,14021}(Ringed Super Earth)"
               geology="{1042,15131}(Forest)" atmosphere="{1042,11071}(Nitrogen/Oxygen)"
-              population="{1042,10011}(None)" maxpopulation="37500000000"
-              settlements="{1042,16051}(Densely Populated)" part="planet001c">
+              population="{1042,10021}" maxpopulation="37500000000"
+              settlements="{1042,16071}(Megalopolis)" part="planet001c">
               <moons>
-                <moon name="{20005,1050}(Luna)" geology="{1042,15071}(Rocks)"
-                  atmosphere="{1042,11081}(Carbon Dioxide)" population="{1042,16011}(Uninhabited)"
-                  settlements="{1042,10011}(None)" part="sphere003" />
+                <moon name="{87466965,2}(Luna)" geology="{1042,15091}(Craters)"
+                  atmosphere="{1042,11071}(Nitrogen/Oxygen)"
+                  population="{1042,10021}" maxpopulation="23363850000"
+                  settlements="{1042,16051}(Densely Populated)"
+                  part="sphere003" />
               </moons>
             </planet>
           </planets>
@@ -96,6 +98,9 @@
           <resourcearea amount="2" ref="sphere_medium_nividium_medium_average" />
         </resourceareas>
         <area sunlight="2.0" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <worlds>
+          <world part="sphere003" />
+        </worlds>
         <system />
       </properties>
     </dataset>
