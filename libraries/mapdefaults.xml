@@ -59,7 +59,7 @@
           <resourcearea amount="2" ref="sphere_medium_ice_medium_veryfast" />
           <resourcearea amount="1" ref="sphere_medium_nividium_low_average" />
         </resourceareas>
-        <area sunlight="2.8" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <area sunlight="2.8" economy="0.8" security="0.8" />
         <worlds>
           <world part="planet001c" />
         </worlds>
@@ -75,7 +75,7 @@
           <resourcearea amount="9" ref="sphere_small_rawscrap_low_veryfast" />
           <resourcearea amount="3" ref="sphere_small_rawkhaakscrap_medium_average" />
         </resourceareas>
-        <area sunlight="1.8" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <area sunlight="1.8" economy="0.8" security="0.8" />
         <system />
       </properties>
     </dataset>
@@ -97,7 +97,7 @@
           <resourcearea amount="4" ref="sphere_medium_ice_veryhigh_veryfast" />
           <resourcearea amount="2" ref="sphere_medium_nividium_medium_average" />
         </resourceareas>
-        <area sunlight="2.0" economy="0.8" security="0.8" tags="allowrandomanomaly" />
+        <area sunlight="2.0" economy="0.8" security="0.8" />
         <worlds>
           <world part="sphere003" />
         </worlds>
