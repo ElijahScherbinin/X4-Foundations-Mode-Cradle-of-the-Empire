@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="Setup_Mod_Empire" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="md.xsd">
+<mdscript name="Setup_Mode_Empire" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="md.xsd">
   <cues>
     <cue name="Give_Argon_Base_Blueprints_Kitstarter" instantiate="true">
       <conditions>
