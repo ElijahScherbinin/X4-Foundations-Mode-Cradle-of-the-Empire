@@ -13,6 +13,10 @@
     <t id="10">A specialized sector rich in debris from ships and stations left over after heavy battles with the Xenon, Haaki, and other races. The sector is ideal for rapidly building up military and industrial capacity, but it requires serious protection.</t>
     <t id="11">Emperor's Joy</t>
     <t id="12">A sector with vast reserves of raw materials waiting to be developed. There is no infrastructure, but the potential is enormous. You can set up large-scale mining and processing facilities here to form the economic backbone of the future Empire. However, the sector is also attractive to competitors, so construction will require protection.</t>
+    <t id="13">Imperial Wastelands</t>
+    <t id="14">An extreme sector with a neutron star consuming a yellow dwarf. It has no resource value as such. Its main asset is the gateway to the Emperor's Wrath sector, which allows for the rapid movement of fleets and cargo between key zones. High solar activity opens up opportunities for specialized energy-intensive production and research, but requires enhanced protection and regular equipment maintenance.</t>
+    <t id="15">{94898927, 13}</t>
+    <t id="16">{94898927, 14}</t>
   </page>
   <page id="94898928" title="Systems" descr="" voice="yes">
     <t id="1">{94898929,1}(Aegis)</t>

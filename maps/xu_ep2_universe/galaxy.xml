@@ -14,6 +14,12 @@
       </offset>
       <macro ref="coe_CL_c002_macro" connection="galaxy" />
     </connection>
+    <connection name="coe_CL_c003_connection" ref="clusters">
+      <offset>
+        <position x="-105000000" y="0" z="8660000" />
+      </offset>
+      <macro ref="coe_CL_c003_macro" connection="galaxy" />
+    </connection>
     <connection name="coe_GA_g001_Cluster_13_Sector001_z001_c001_s001_z007_connection" ref="destination" path="../Cluster_13_connection/Cluster_13_Sector001_connection/coe_ZO_Cluster_13_Sector001_z001_connection/coe_GA_g001_Cluster_13_Sector001_z001_c001_s001_z007_connection">
       <macro connection="destination" path="../../../../../coe_CL_c001_connection/coe_SE_c001_s001_connection/coe_ZO_c001_s001_z007_connection/coe_GA_g001_c001_s001_z007_Cluster_13_Sector001_z001_connection" />
     </connection>
@@ -31,6 +37,9 @@
     </connection>
     <connection name="coe_GA_g001_c002_s002_z021_c002_s003_z020_connection" ref="destination" path="../coe_CL_c002_connection/coe_SE_c002_s002_connection/coe_ZO_c002_s002_z021_connection/coe_GA_g001_c002_s002_z021_c002_s003_z020_connection">
       <macro connection="destination" path="../../../../../coe_CL_c002_connection/coe_SE_c002_s003_connection/coe_ZO_c002_s003_z020_connection/coe_GA_g001_c002_s003_z020_c002_s002_z021_connection" />
+    </connection>
+    <connection name="coe_GA_g001_c002_s002_z031_c003_s001_z006_connection" ref="destination" path="../coe_CL_c002_connection/coe_SE_c002_s002_connection/coe_ZO_c002_s002_z031_connection/coe_GA_g001_c002_s002_z031_c003_s001_z006_connection">
+      <macro connection="destination" path="../../../../../coe_CL_c003_connection/coe_SE_c003_s001_connection/coe_ZO_c003_s001_z006_connection/coe_GA_g001_c003_s001_z006_c002_s002_z031_connection" />
     </connection>
   </add>
 </diff>

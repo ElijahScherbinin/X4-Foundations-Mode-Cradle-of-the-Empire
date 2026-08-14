@@ -5,7 +5,9 @@
       <properties>
         <identification name="{94898927,1}" description="{94898927,2}" image="enc_cluster01" />
         <area factionlogic="false" />
-        <system />
+        <system>
+          <space environment="{1042,12011}(Clear Space)" />
+        </system>
       </properties>
     </dataset>
     <dataset macro="coe_SE_c001_s001_macro">
@@ -101,6 +103,26 @@
         <worlds>
           <world part="sphere003" />
         </worlds>
+        <system />
+      </properties>
+    </dataset>
+    <dataset macro="coe_CL_c003_macro">
+      <properties>
+        <identification name="{94898927,13}" description="{94898927,14}" image="enc_cluster404" />
+        <area factionlogic="false" />
+        <system>
+          <space environment="{1042,12011}(Clear Space)" />
+          <suns>
+            <sun class="{1042,13021}(Yellow Dwarf)" />
+            <sun class="{1042,13181}(Neutron Star)" />
+          </suns>
+        </system>
+      </properties>
+    </dataset>
+    <dataset macro="coe_SE_c003_s001_macro">
+      <properties>
+        <identification name="{94898927,15}" description="{94898927,16}" />
+        <area sunlight="9.99" economy="0.8" security="0.8" />
         <system />
       </properties>
     </dataset>
