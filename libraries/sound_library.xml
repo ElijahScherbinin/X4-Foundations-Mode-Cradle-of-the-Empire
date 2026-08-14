@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <soundlibrary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="sound_library.xsd">
-    <sound id="87466964_normal" description="Location Name Pool" repeat="1" is3d="1" preload="0">
-        <sample start="extensions\qz_mod_empire\voice\87466964\normal" />
+    <sound id="94898927_normal" description="Location Name Pool" repeat="1" is3d="1" preload="0">
+        <sample start="extensions\qz_mod_empire\voice\94898927\normal" />
         <effects>
             <reverb room="sewer pipe" roomsize="10" drymix="5" density="90" />
         </effects>
     </sound>
-    <sound id="87466964_comm" description="Location Name Pool" repeat="1" is3d="1" preload="0">
-        <sample start="extensions\qz_mod_empire\voice\87466964\normal" />
+    <sound id="94898927_comm" description="Location Name Pool" repeat="1" is3d="1" preload="0">
+        <sample start="extensions\qz_mod_empire\voice\94898927\normal" />
         <effects>
             <reverb room="sewer pipe" roomsize="10" drymix="5" density="90" />
         </effects>

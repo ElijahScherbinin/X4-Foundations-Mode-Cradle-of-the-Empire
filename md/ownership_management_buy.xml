@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Ownership_Management_Buy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\libraries\md.xsd">
+    <cues>
+        
+        <!-- Шаг 1: Перехват разговора с менеджером -->
+        <cue name="Contact_Manager_Handler" instantiate="true">
+        <conditions>
+            <check_any>
+                <!-- ПРОВЕРКА: Личное общение -->
+                <event_conversation_started conversation="default" />
+                <event_conversation_returned_to_section section="default" />
+            </check_any>
+            <check_all>
+                <!-- ПРОВЕРКА: NPC является менеджером -->
+                <check_value value="event.object.controlpost == controlpost.manager" />
+                <!-- ПРОВЕРКА: станция не принадлежит игроку -->
+                <check_value value="not event.object.station.isplayerowned" />
+                <!-- ПРОВЕРКА: станция не является Штаб-квартирой фракции -->
+                <check_value value="not event.object.station.isfactionheadquarters" />
+            </check_all>
+        </conditions>
+        <actions>
+            <do_if value="@md.ExtendedConversationMenu.Main.exists">
+                <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$OwnershipControlMenu" exact="table[ $signalCue = Contact_Manager_Menu_Handler, $params = [] ]" />
+            </do_if>
+            <do_else>
+                <signal_cue_instantly cue="Contact_Manager_Menu_Handler" />
+            </do_else>
+        </actions>
+        </cue>
+
+        <!-- Шаг 2: Добавление главной кнопки "Управление собственностью" в меню менеджера -->
+        <cue name="Contact_Manager_Menu_Handler" instantiate="true">
+            <conditions>
+                <event_cue_signalled />
+            </conditions>
+            <actions>
+                <!-- ID 1: "Управление собственностью". -->
+                <add_player_choice_sub text="{94898930,1}" section="Action_Offer" />
+            </actions>
+        </cue>
+
+        <!-- Шаг 3: Представление предложения о продаже -->
+        <cue name="Action_Offer_Handler" instantiate="true">
+            <conditions>
+                <check_any>
+                    <event_conversation_next_section section="Action_Offer"/>
+                    <event_conversation_returned_to_section section="Action_Offer"/>
+                </check_any>
+            </conditions>
+            <actions>
+                <!-- Алгоритм калькуляции базовой цены модулей, груза и участка -->
+                <set_value name="$StationPrice" exact="event.object.container.value" />
+                <set_value name="$CargoPrice" exact="0ct" />
+                <do_for_each name="$Ware" in="event.object.container.cargo.table.keys.list">
+                    <set_value name="$CargoPrice" exact="(event.object.container.cargo.{$Ware}.count * $Ware.maxprice)ct" operation="add"/>
+                </do_for_each>
+                <set_value name="$BuildPlotPrice" exact="event.object.station.buildplot.price" />
+                <!-- Сбор данных о дефиците производимых товаров для финальной наценки -->
+                <create_list name="$AverageRelativePricesOfProducts" />
+                <do_for_each name="$Ware" in="event.object.container.products.list">
+                    <set_value name="$AverageRelativePriceOfProduct" exact="0f" />
+                    <find_station_by_true_owner name="$StationsProducingWare" faction="event.object.station.owner" space="player.galaxy" multiple="true">
+                    <match_products wares="$Ware"/>
+                    </find_station_by_true_owner>
+                    <do_for_each name="$Station" in="$StationsProducingWare">
+                    <find_sell_offer result="$Trade" seller="$Station" wares="$Ware" />
+                    <!-- Безопасная проверка: если предложение на рынке реально существует -->
+                    <do_if value="$Trade != null">
+                        <set_value name="$AverageRelativePriceOfProduct" exact="$Trade.relativeprice" operation="add" />
+                    </do_if>
+                    <do_else>
+                        <!-- Если станция ничего не продает, считаем её цену нейтральной (0.0f) -->
+                        <set_value name="$AverageRelativePriceOfProduct" exact="0.0f" operation="add" />
+                    </do_else>
+                    </do_for_each>
+                    <do_if value="$StationsProducingWare.count gt 1">
+                    <set_value name="$AverageRelativePriceOfProduct" exact="$AverageRelativePriceOfProduct / ($StationsProducingWare.count)f" />
+                    </do_if>
+                    <do_else>
+                    <!-- Если это последняя станция, производящая товар, она получает максимальный относительный ценовой коэффициент. -->
+                    <set_value name="$AverageRelativePriceOfProduct" exact="1.0f" />
+                    </do_else>
+                    <append_to_list name="$AverageRelativePricesOfProducts" exact="$AverageRelativePriceOfProduct" />
+                    <remove_value name="$AverageRelativePriceOfProduct" />
+                </do_for_each>
+                <set_value name="$MaxRelativePriceOfAnyProduct" exact="$AverageRelativePricesOfProducts.max" />
+                <clear_list list="$AverageRelativePricesOfProducts" />
+                <do_if value="$MaxRelativePriceOfAnyProduct lt 0">
+                    <set_value name="$MaxRelativePriceOfAnyProduct" exact="0" />
+                </do_if>
+                <!-- Финальный расчет цены покупки с учетом экспоненты дефицита -->
+                <set_value name="$FinalPrice" exact="(($StationPrice + $CargoPrice + $BuildPlotPrice) ^ (1+($MaxRelativePriceOfAnyProduct/10)))ct" />
+                <!-- choiceparam передает текущую фракцию-владельца и рассчитанную стоимость в финальный обработчик покупки -->
+                <add_player_choice_sub text="{94898931,1}.[$FinalPrice.formatted.{'%1cs %Cr'}]" position="1" choiceparam="[event.object.station.owner, $FinalPrice]" section="Action_Buy"/>
+                <!-- ID 2: Кнопка "Назад" в правый нижний угол -->
+                <add_player_choice_return position="bottom_right" text="{94898935,1}"/>
+            </actions>
+        </cue>
+        
+        <!-- Шаг 3: Выполнение покупки -->
+        <cue name="Action_Buy_Handler" instantiate="true">
+            <conditions>
+                <check_any>
+                    <!-- ПРОВЕРКА: Игрок подтвердил покупку выбранной NPC станции -->
+                    <event_conversation_next_section section="Action_Buy"/>
+                    <event_conversation_returned_to_section section="Action_Buy"/>
+                </check_any>
+            </conditions>
+            <actions>
+                <!-- Получаем итоговую стоимость сделки из 2-го элемента массива параметров -->
+                <set_value name="$cash" exact="(event.param2.{2})ct" />
+                <!-- ПРОВЕРКА БАЛАНСА: Достаточно ли у игрока кредитов (ct) для совершения сделки -->
+                <do_if value="(player.money)ct lt $cash">
+                    <!-- ВЕТКА ОТКЛОНЕНИЯ СДЕЛКИ (НЕДОСТАТОЧНО СРЕДСТВ) -->
+                    <!-- Логирование провальной транзакции: формирование строки списания средств -->
+                    <set_value name="$LogText" exact="{94898931,4}.[event.object.container.name, event.object.container.sector.name, $cash.formatted.{'%s'}]" />
+                    <show_notification text="$LogText" priority="100" />
+                </do_if>
+                <do_else>
+                    <!-- Логирование успешной транзакции: формирование строки списания средств -->
+                    <set_value name="$LogTitle" exact="{94898931,2}.[event.param2.{1}.name]" />
+                    <set_value name="$LogText" exact="{94898931,3}.[event.object.container.name, event.object.container.sector.name, event.param2.{1}.name, $cash.formatted.{'%s'}]" />
+                    <write_to_logbook money="$cash" title="$LogTitle" category="upkeep" text="$LogText"/>
+                    <show_notification text="$LogText" priority="1" />
+                    <!-- СПИСАНИЕ СРЕДСТВ: Изымаем кредиты со счета игрока (передача отрицательного значения) -->
+                    <reward_player money="-$cash"/>
+                    <!-- Подготовка переменных для передачи прав на объект -->
+                    <set_value name="$Station" exact="event.object.station" />
+                    <set_value name="$Faction" exact="faction.player" />
+                    <!-- ПЕРЕДАЧА СОБСТВЕННОСТИ: Вызов стандартной библиотеки игры для смены владельца станции на игрока -->
+                    <run_actions ref="md.LIB_Generic.TransferStationOwnership">
+                        <param name="Station" value="$Station"/>
+                        <param name="Faction" value="$Faction"/>
+                    </run_actions>
+                    <!-- ОФОРМЛЕНИЕ ЗЕМЛИ: Принудительный автоматический выкуп строительного участка в собственность игрока -->
+                    <set_build_plot x="$Station.buildplot.max.x" y="$Station.buildplot.max.y" z="$Station.buildplot.max.z" paid="true" object="$Station" />
+                </do_else>
+            </actions>
+        </cue>
+
+    </cues>
+</mdscript>

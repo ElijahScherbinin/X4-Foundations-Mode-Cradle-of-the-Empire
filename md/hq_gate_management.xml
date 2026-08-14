@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="HQ_Gate_Management" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="..\..\..\libraries\md.xsd">
+  <cues>
+    
+    <!-- Шаг 1: Перехват разговора с Босо Та -->
+    <cue name="Contact_BosoTa_Handler" instantiate="true">
+      <conditions>
+        <event_conversation_started actor="@md.$PersistentCharacters.$BosoTa" />
+        <!-- ПРОВЕРКА: станция является Штаб-квартирой -->
+        <check_value value="event.object.station.isheadquarters" />
+        <!-- ПРОВЕРКА: станция принадлежит игроку -->
+        <check_value value="event.object.station.isplayerowned" />
+      </conditions>
+      <actions>
+        <do_if value="@md.ExtendedConversationMenu.Main.exists">
+          <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$GateControlMenu" exact="table[ $signalCue = Contact_BosoTa_Menu_Handler, $params = [] ]" />
+        </do_if>
+        <do_else>
+          <signal_cue_instantly cue="Contact_BosoTa_Menu_Handler" />
+        </do_else>
+      </actions>
+    </cue>
+
+    <!-- Шаг 2: Добавление главной кнопки "Управление вратами" в меню Босота -->
+    <cue name="Contact_BosoTa_Menu_Handler" instantiate="true">
+      <conditions>
+        <event_cue_signalled />
+      </conditions>
+      <actions>
+        <!-- ID 1: "Управление вратами". Переводит в секцию со списком врат -->
+        <add_player_choice_sub text="{94898933,1}" section="Select_Gate" />
+      </actions>
+    </cue>
+
+    <!-- Шаг 3: Динамическое построение списка врат текущего сектора -->
+    <cue name="Select_Gate_Handler" instantiate="true">
+      <conditions>
+        <check_any>
+          <event_conversation_next_section section="Select_Gate" />
+          <event_conversation_returned_to_section section="Select_Gate" />
+        </check_any>
+      </conditions>
+      <actions>
+        <!-- Логика пагинации: управление индексом текущей страницы ($page) -->
+        <do_if value="event.param2 == 'previous'">
+            <!-- Уменьшаем индекс страницы на 1 при нажатии "Назад" -->
+            <set_value name="$page" operation="subtract"/>
+        </do_if>
+        <do_elseif value="event.param2 == 'next'">
+            <!-- Увеличиваем индекс страницы на 1 при нажатии "Далее" -->
+            <set_value name="$page" operation="add"/>
+        </do_elseif>
+        <do_else>
+            <!-- Сброс на первую страницу (индекс 0) при первичном открытии меню -->
+            <set_value name="$page" exact="0"/>
+        </do_else>
+        <!-- Находим все врата в текущем секторе, где физически расположена ШК -->
+        <create_list name="$SectorGates" />
+        <find_gate name="$SectorGates" space="event.object.station.sector" multiple="true" />
+        <!-- ФИЛЬТРАЦИЯ: Удаляем врата у которых нет связи с другим сектором -->
+        <do_all exact="$SectorGates.count" counter="$i" reverse="true">
+          <set_value name="$Gate" exact="$SectorGates.{$i}" />
+            <do_if value="not $Gate.exit.exists or not $Gate.exit.sector.exists">
+              <remove_value name="$Gate"/>
+            </do_if>
+        </do_all>
+        <!-- ЦИКЛ ВЫВОДА: Отображаем максимум 4 врат на одной странице диалога -->
+        <do_all exact="4" counter="$i">
+            <!-- Вычисляем абсолютный индекс врат в общем списке на основе текущей страницы -->
+            <set_value name="$current_id" exact="$i + (4 * $page)"/>
+            <do_if value="$SectorGates.count lt $current_id">
+                <!-- Прерываем цикл, если доступные врата в списке закончились -->
+                <break/>
+            </do_if>
+            <!-- Отображаем имя сектора назначения на кнопке -->
+            <!-- Передаем объект выбранных врат в следующую секцию через choiceparam -->
+            <set_value name="$Gate" exact="$SectorGates.{$current_id}"/>
+            <set_value name="$choice_text" exact="{94898933,4}.[$Gate.exit.sector.name]" />
+            <add_player_choice_sub text="$choice_text" section="Control_Action" choiceparam="$Gate" />
+        </do_all>
+        <!-- Интерфейс навигации: вывод сервисных кнопок переключения страниц -->
+        <do_if value="$page == 0">
+            <!-- ID 3: На первой странице кнопка возвращает в предыдущее меню -->
+            <add_player_choice_return position="bottom_right" text="{94898935,1}"/>
+        </do_if>
+        <do_else>
+            <!-- ID 3: На последующих страницах кнопка "Предыдущая страница" (параметр 'previous') -->
+            <add_player_choice text="{94898935,2}" choiceparam="'previous'" position="bottom_right" section="Action_Offers"/>
+        </do_else>
+        <do_if value="$SectorGates.count gt 4">
+            <!-- ID 3: Если врат больше 4, выводим во вторую колонку кнопку "Следующая страница" (параметр 'next') -->
+            <add_player_choice text="{94898935,3}" choiceparam="'next'" position="right" section="Action_Offers"/>
+        </do_if>
+    </actions>
+    </cue>
+
+    <!-- Шаг 4: Меню выбора действия для конкретных врат -->
+    <cue name="Action_Handler" instantiate="true">
+      <conditions>
+        <check_any>
+          <event_conversation_next_section section="Control_Action" />
+          <event_conversation_returned_to_section section="Control_Action" />
+        </check_any>
+      </conditions>
+      <actions>
+        <!-- Ловим выбранные врата из event.param -->
+        <set_value name="$SelectedGate" exact="event.param2" />
+
+        <!-- Передаем объект врат в финальные исполнительные хэндлеры -->
+        <do_if value="$SelectedGate.isactive">
+          <add_player_choice text="{94898933,3}" section="Action_Close" choiceparam="$SelectedGate" />
+        </do_if>
+        <do_else>
+          <add_player_choice text="{94898933,2}" section="Action_Open" choiceparam="$SelectedGate" />
+        </do_else>
+
+        <!-- Кнопка "Назад" возвращает к списку выбора врат -->
+        <add_player_choice_return position="bottom_right" text="{94898935,1}" />
+      </actions>
+    </cue>
+
+    <!-- Шаг 5.1: Обработка выбора "Открыть врата" -->
+    <cue name="Action_Open_Handler" instantiate="true">
+      <conditions>
+        <event_conversation_next_section section="Action_Open" />
+      </conditions>
+      <actions>
+        <set_value name="$Gate" exact="event.param2" />
+        <do_if value="$Gate.exists and $Gate.exit.exists">
+          <!-- Активируем обе стороны прыжка (вход и выход) для стабильности ИИ кораблей -->
+          <set_object_active object="$Gate" activate="true" />
+          <set_object_active object="$Gate.exit" activate="true" />
+
+          <!-- Сообщение в бортовой журнал с динамическим именем сектора -->
+          <set_value name="$logtext" exact="{94898933,5}.[$Gate.sector.name, $Gate.exit.sector.name]" />
+          <write_to_logbook category="general" title="{94898933,1}" text="$logtext" />
+          
+          <!-- Сообщение в панель уведомлений с динамическим именем сектора -->
+          <show_notification text="$logtext" priority="100" />
+        </do_if>
+      </actions>
+    </cue>
+
+    <!-- Шаг 5.2: Обработка выбора "Закрыть врата" -->
+    <cue name="Action_Close_Handler" instantiate="true">
+      <conditions>
+        <event_conversation_next_section section="Action_Close" />
+      </conditions>
+      <actions>
+        <set_value name="$Gate" exact="event.param2" />
+        <do_if value="$Gate.exists and $Gate.exit.exists">
+          <!-- Деактивируем обе стороны прыжка (вход и выход) -->
+          <set_object_active object="$Gate" activate="false" />
+          <set_object_active object="$Gate.exit" activate="false" />
+
+          <!-- Сообщение в бортовой журнал с динамическим именем сектора -->
+          <set_value name="$logtext" exact="{94898933,6}.[$Gate.sector.name, $Gate.exit.sector.name]" />
+          <write_to_logbook category="general" title="{94898933,1}" text="$logtext" />
+          
+          <!-- Сообщение в панель уведомлений с динамическим именем сектора -->
+          <show_notification text="$logtext" priority="100" />
+        </do_if>
+      </actions>
+    </cue>
+
+  </cues>
+</mdscript>

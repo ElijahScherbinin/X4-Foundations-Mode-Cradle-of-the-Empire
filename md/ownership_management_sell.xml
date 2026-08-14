@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Ownership_Management_Sell" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\libraries\md.xsd">
+    <cues>
+
+        <!-- Шаг 1: Перехват разговора с менеджером -->
+        <cue name="Contact_Manager_Handler" instantiate="true">
+        <conditions>
+            <check_any>
+                <!-- ПРОВЕРКА: Личное общение -->
+                <event_conversation_started conversation="default" />
+                <event_conversation_returned_to_section section="default" />
+                <!-- ПРОВЕРКА: Общение по каналу связи -->
+                <event_conversation_started conversation="Speak_" />
+                <event_conversation_returned_to_section section="Speak_" />
+            </check_any>
+            <check_all>
+                <!-- ПРОВЕРКА: NPC является менеджером -->
+                <check_value value="event.object.controlpost == controlpost.manager" />
+                <!-- ПРОВЕРКА: станция принадлежит игроку -->
+                <check_value value="event.object.station.isplayerowned" />
+                <!-- ПРОВЕРКА: не является Штаб-квартирой -->
+                <check_value value="not event.object.station.isheadquarters" />
+            </check_all>
+        </conditions>
+        <actions>
+            <do_if value="@md.ExtendedConversationMenu.Main.exists">
+                <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$OwnershipControlMenu" exact="table[ $signalCue = Contact_Manager_Menu_Handler, $params = [] ]" />
+            </do_if>
+            <do_else>
+                <signal_cue_instantly cue="Contact_Manager_Menu_Handler" />
+            </do_else>
+        </actions>
+        </cue>
+
+        <!-- Шаг 2: Добавление главной кнопки "Управление собственностью" в меню менеджера -->
+        <cue name="Contact_Manager_Menu_Handler" instantiate="true">
+            <conditions>
+                <event_cue_signalled />
+            </conditions>
+            <actions>
+                <!-- ID 1: "Управление собственностью". -->
+                <add_player_choice_sub text="{94898930,1}" section="Action_Offers" />
+            </actions>
+        </cue>
+
+        <!-- Шаг 3: Представление списка предложений о покупке -->
+        <cue name="Action_Offers_Handler" instantiate="true">
+            <conditions>
+                <check_any>
+                    <event_conversation_next_section section="Action_Offers"/>
+                    <event_conversation_returned_to_section section="Action_Offers"/>
+                </check_any>
+            </conditions>
+            <actions>
+                <!-- Логика пагинации: управление индексом текущей страницы ($page) -->
+                <do_if value="event.param2 == 'previous'">
+                    <!-- Уменьшаем индекс страницы на 1 при нажатии "Назад" -->
+                    <set_value name="$page" operation="subtract"/>
+                </do_if>
+                <do_elseif value="event.param2 == 'next'">
+                    <!-- Увеличиваем индекс страницы на 1 при нажатии "Далее" -->
+                    <set_value name="$page" operation="add"/>
+                </do_elseif>
+                <do_else>
+                    <!-- Сброс на первую страницу (индекс 0) при первичном открытии меню -->
+                    <set_value name="$page" exact="0"/>
+                </do_else>
+                <!-- Инициализация базового списка покупателей (ванильные фракции) -->
+                <set_value name="$validFactions" exact="[faction.antigone, faction.argon, faction.holyorder, faction.ministry, faction.paranid, faction.teladi, faction.hatikvah, faction.scaleplate]"/>
+                <!-- Динамическое расширение списка за счет вызова библиотек совместимости с DLC и сюжетами -->
+                <include_actions ref="PrepForSplitFactions"/>  <!-- DLC: Split Vendetta -->
+                <include_actions ref="AddCradleFactions"/>     <!-- DLC: Cradle of Humanity -->
+                <include_actions ref="AddAvariceFactions"/>    <!-- DLC: Tides of Avarice -->
+                <include_actions ref="CheckAddStoryFactions"/> <!-- Фракции, открываемые по сюжетным линиям -->
+                <!-- ФИЛЬТРАЦИЯ: Удаляем пустые фракции или те, у которых враждебны к игроку -->
+                <do_all exact="$validFactions.count" counter="$i" reverse="true">
+                    <do_if value="$validFactions.{$i} == null or $validFactions.{$i}.relationto.{faction.player} lt -0.0032">
+                        <remove_value name="$validFactions.{$i}"/>
+                    </do_if>
+                </do_all>
+                <!-- ЦИКЛ ВЫВОДА: Отображаем максимум 4 фракции на одной странице диалога -->
+                <do_all exact="4" counter="$i">
+                    <!-- Вычисляем абсолютный индекс фракции в общем списке на основе текущей страницы -->
+                    <set_value name="$actualSiteItemId" exact="$i + (4 * $page)"/>
+                    <do_if value="$validFactions.count lt $actualSiteItemId">
+                        <!-- Прерываем цикл, если доступные фракции в списке закончились -->
+                        <break/>
+                    </do_if>
+                    <set_value name="$faction" exact="$validFactions.{$actualSiteItemId}"/>
+                    <set_value name="$relation" exact="$faction.relationto.{faction.player}"/>
+                    <!-- Расчет цены покупки для конкретной фракции с учетом репутационного модификатора -->
+                    <include_actions ref="CalculatePrice" comment="Inputs: $faction $relation event | Sets $TotalPrice"/>
+                    <do_if value="$faction != null">
+                        <!-- Формирование кнопки: Название фракции + динамически рассчитанная цена продажи в формате (%1cs %Cr) -->
+                        <!-- choiceparam передает накопленный массив данных о сделке в финальный хэндлер продажи -->
+                        <add_player_choice_sub text="'%1 (%2)'.[$faction.name, $TotalPrice.formatted.{'%1cs %Cr'}]" position="$i" choiceparam="[$actualSiteItemId, $faction, $relation, $TotalPrice]" section="Action_Sell"/>
+                    </do_if>
+                </do_all>
+                <!-- Интерфейс навигации: вывод сервисных кнопок переключения страниц -->
+                <do_if value="$page == 0">
+                    <!-- ID 2: На первой странице кнопка возвращает в предыдущее меню -->
+                    <add_player_choice_return position="bottom_right" text="{94898935,1}"/>
+                </do_if>
+                <do_else>
+                    <!-- ID 3: На последующих страницах кнопка "Предыдущая страница" (параметр 'previous') -->
+                    <add_player_choice text="{94898935,2}" choiceparam="'previous'" position="bottom_right" section="Action_Offers"/>
+                </do_else>
+                <do_if value="$validFactions.count gt 4">
+                    <!-- ID 4: Если фракций больше 4, выводим во вторую колонку кнопку "Следующая страница" (параметр 'next') -->
+                    <add_player_choice text="{94898935,3}" choiceparam="'next'" position="right" section="Action_Offers"/>
+                </do_if>
+            </actions>
+        </cue>
+
+        <!-- Шаг 4: Выполнение продажи -->
+        <cue name="Action_Sell_Handler" instantiate="true">
+        <conditions>
+            <check_any>
+            <!-- ПРОВЕРКА: Игрок выбрал конкретную фракцию и подтвердил продажу -->
+            <event_conversation_next_section section="Action_Sell"/>
+            <event_conversation_returned_to_section section="Action_Sell"/>
+            </check_any>
+        </conditions>
+        <actions>
+            <!-- Проверяем, что массив параметров event.param2 содержит валидные данные о фракции и цене -->
+            <do_if value="@event.param2.{2} != null and @event.param2.{4} != null">
+                <!-- Логирование транзакции: формирование сложной строки из текстовых блоков T-файла -->
+                <set_value name="$LogTitle" exact="{94898932,1}.[event.param2.{2}.name]" />
+                <set_value name="$LogText" exact="{94898932,2}.[event.object.container.name, event.object.container.sector.name, event.param2.{2}.name, $cash.formatted.{'%s'}]" />
+                <write_to_logbook money="$cash" title="$LogTitle" category="upkeep" text="$LogText"/>
+                <show_notification text="$LogText" priority="1" />
+                <!-- Получаем итоговую сумму сделки из 4-го элемента переданного массива параметров -->
+                <set_value name="$cash" exact="(event.param2.{4})ct"/>
+                <!-- НАЧИСЛЕНИЕ СРЕДСТВ: Перечисляем кредиты на счет игрока -->
+                <reward_player money="(event.param2.{4})ct"/>
+                <!-- Подготовка переменных для передачи прав на объект -->
+                <set_value name="$Station" exact="event.object.station" />
+                <set_value name="$Faction" exact="event.param2.{2}" />
+                <!-- ПЕРЕДАЧА СОБСТВЕННОСТИ: Вызов стандартной библиотеки игры для смены владельца станции -->
+                <run_actions ref="md.LIB_Generic.TransferStationOwnership">
+                    <param name="Station" value="$Station"/>
+                    <param name="Faction" value="$Faction"/>
+                </run_actions>
+            </do_if>
+        </actions>
+        </cue>
+
+        <!-- Шаг 3.1: Библиотека проверки и добавления фракций из DLC "Split Vendetta" -->
+        <library name="PrepForSplitFactions">
+        <actions>
+            <!-- ПРОВЕРКА: Установлено и активировано ли у игрока дополнение со Сплитами -->
+            <do_if value="@md.Setup_DLC_Split.Setup != null">
+                <!-- Добавляем Свободные Сплиты (freesplit / Патриархат Зьярт) в общий список доступных покупателей -->
+                <append_to_list name="$validFactions" exact="@faction.freesplit"/>
+                <!-- Добавляем Семью Сплитов (split / Семья Керк) в общий список доступных покупателей -->
+                <append_to_list name="$validFactions" exact="@faction.split"/>
+            </do_if>
+        </actions>
+        </library>
+
+        <!-- Шаг 3.2: Библиотека проверки и добавления фракций из DLC "Tides of Avarice" -->
+        <library name="AddAvariceFactions">
+        <actions>
+            <!-- ПРОВЕРКА: Установлено и активно ли у игрока дополнение "Волны Авариды" -->
+            <do_if value="@md.Setup_DLC_Pirate.Setup != null">
+                <!-- Добавляем Синдикат Силы в общий список доступных покупателей -->
+                <append_to_list name="$validFactions" exact="@faction.loanshark"/>
+                <!-- Добавляем Волновые Стервятники в общий список доступных покупателей -->
+                <append_to_list name="$validFactions" exact="@faction.scavenger"/>
+            </do_if>
+        </actions>
+        </library>
+
+        <!-- Шаг 3.3: Библиотека проверки и добавления фракций из DLC "Cradle of Humanity" -->
+        <library name="AddCradleFactions">
+        <actions>
+            <!-- ПРОВЕРКА: Установлено и активно ли у игрока дополнение "Колыбель Человечества" -->
+            <do_if value="@md.Setup_DLC_Terran.Setup != null">
+                <!-- Добавляем Сегрегацию Терран / Пионеров Сегариса (pioneers) в общий список -->
+                <append_to_list name="$validFactions" exact="@faction.pioneers"/>
+                <!-- Добавляем Земной Протекторат (terran) в общий список доступных покупателей -->
+                <append_to_list name="$validFactions" exact="@faction.terran"/>
+                <!-- Добавляем фракцию Яки (yaki) в общий список доступных покупателей -->
+                <append_to_list name="$validFactions" exact="@faction.yaki"/>
+            </do_if>
+        </actions>
+        </library>
+
+        <!-- Шаг 3.4: Библиотека динамического поиска и добавления сюжетных фракций -->
+        <library name="CheckAddStoryFactions">
+        <actions>
+            <!-- Цикл перебора скрытых/динамических фракций (Герцогский буканьерский союз и Священное общество Триединения) -->
+            <do_for_each name="$_faction" in="[@faction.court, @faction.trinity]">
+            <!-- ПРОВЕРКА: Существует ли фракция в текущей сборке игры (вышли ли соответствующие DLC/обновления) -->
+            <do_if value="$_faction == null">
+                <continue/>
+            </do_if>
+            <!-- ПРОВЕРКА: Наличие фракции в космосе. Ищем хотя бы одну станцию фракции по всей галактике -->
+            <find_station name="$_station" owner="$_faction" space="player.galaxy"/>
+            <!-- ПРОВЕРКА: Если станция найдена, значит фракция уже сформирована по сюжету и активна -->
+            <do_if value="@$_station.exists">
+                <!-- Добавляем активированную фракцию в общий список доступных покупателей станций -->
+                <append_to_list name="$validFactions" exact="@$_faction"/>
+            </do_if>
+            </do_for_each>
+        </actions>
+        </library>
+        
+        <!-- Шаг 3.5: Экономическая библиотека расчета модификатора цены на основе репутации -->
+        <library name="CalculatePrice">
+        <actions>
+            <!-- ЭТАП 1: ОПРЕДЕЛЕНИЕ ПРОЦЕНТНОГО БОНУСА НА ОСНОВЕ ОТНОШЕНИЙ ФРАКЦИИ К ИГРОКУ -->
+            <do_if value="$relation ge 0.0032 and $relation lt 0.01">
+                <!-- Репутация от +1 до +9: Бонус к цене продажи +5% -->
+                <set_value name="$priceModifier" exact="0.05"/>
+            </do_if>
+            <do_if value="$relation ge 0.01 and $relation lt 0.032">
+                <!-- Репутация от +10 до +19: Бонус к цене продажи +10% -->
+                <set_value name="$priceModifier" exact="0.1"/>
+            </do_if>
+            <do_elseif value="$relation ge 0.032 and $relation lt 0.1">
+                <!-- Репутация от +20 до +25: Бонус к цене продажи +15% -->
+                <set_value name="$priceModifier" exact="0.15"/>
+            </do_elseif>
+            <do_elseif value="$relation ge 0.1 and $relation lt 0.32">
+                <!-- Репутация от +26 до +29: Бонус к цене продажи +20% -->
+                <set_value name="$priceModifier" exact="0.2"/>
+            </do_elseif>
+            <do_elseif value="$relation ge 0.32">
+                <!-- Репутация +30 (Максимум): Бонус к цене продажи +30% -->
+                <set_value name="$priceModifier" exact="0.3"/>
+            </do_elseif>
+            <do_else>
+                <!-- Нейтральные или пограничные отношения (0): Бонус отсутствует -->
+                <set_value name="$priceModifier" exact="0.0"/>
+            </do_else>
+            <!-- ЭТАП 2: КАЛЬКУЛЯЦИЯ БАЗОВОЙ СТОИМОСТИ КОМПЛЕКСА ДЛЯ КОНКРЕТНОЙ ФРАКЦИИ -->
+            <!-- Получаем базовую стоимость модулей и дронов (значение в кредитах) -->
+            <set_value name="$StationPrice" exact="(event.object.container.value)ct" />
+            <set_value name="$CargoPrice" exact="0" />
+            <!-- Цикл подсчета полной стоимости товаров на складах по максимальной цене -->
+            <do_for_each name="$Ware" in="event.object.container.cargo.table.keys.list">
+                <set_value name="$CargoPrice" exact="(event.object.container.cargo.{$Ware}.count * $Ware.maxprice)ct" operation="add"/>
+            </do_for_each>
+            <!-- Добавляем стоимость земельного участка строительной зоны -->
+            <set_value name="$BuildPlotPrice" exact="(event.object.station.buildplot.price)ct" />
+            <!-- ЭТАП 3: РАСЧЕТ ИТОГОВОЙ СУММЫ С УЧЕТОМ НАЦЕНКИ ЗА ДРУЖЕСТВЕННЫЕ ОТНОШЕНИЯ -->
+            <!-- Формула: (Модули + Карго + Земля) * (1 + Модификатор репутации) -->
+            <set_value name="$BasePrice" exact="$StationPrice + $CargoPrice + $BuildPlotPrice" />
+            <set_value name="$TotalPrice" exact="( (( $BasePrice )f * (1.0f + $priceModifier)) )ct" />
+        </actions>
+        </library>
+
+    </cues>
+</mdscript>
