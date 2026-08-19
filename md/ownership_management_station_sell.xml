@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="Ownership_Management_Sell" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\libraries\md.xsd">
+<mdscript name="Ownership_Management_Station_Sell" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
     <cues>
 
         <!-- Шаг 1: Перехват разговора с менеджером -->
-        <cue name="Contact_Manager_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Sell_Contact_Manager_Handler" instantiate="true">
         <conditions>
             <check_any>
                 <!-- ПРОВЕРКА: Личное общение -->
@@ -24,31 +24,31 @@
         </conditions>
         <actions>
             <do_if value="@md.ExtendedConversationMenu.Main.exists">
-                <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$OwnershipControlMenu" exact="table[ $signalCue = Contact_Manager_Menu_Handler, $params = [] ]" />
+                <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$ContactManagerMenu" exact="table[ $signalCue = Ownership_Management_Station_Sell_Contact_Manager_Menu_Handler, $params = [] ]" />
             </do_if>
             <do_else>
-                <signal_cue_instantly cue="Contact_Manager_Menu_Handler" />
+                <signal_cue_instantly cue="Ownership_Management_Station_Sell_Contact_Manager_Menu_Handler" />
             </do_else>
         </actions>
         </cue>
 
         <!-- Шаг 2: Добавление главной кнопки "Управление собственностью" в меню менеджера -->
-        <cue name="Contact_Manager_Menu_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Sell_Contact_Manager_Menu_Handler" instantiate="true">
             <conditions>
                 <event_cue_signalled />
             </conditions>
             <actions>
                 <!-- ID 1: "Управление собственностью". -->
-                <add_player_choice_sub text="{94898930,1}" section="Action_Offers" />
+                <add_player_choice_sub text="{94898930,1}" section="Ownership_Management_Station_Sell_Action_Offers" />
             </actions>
         </cue>
 
         <!-- Шаг 3: Представление списка предложений о покупке -->
-        <cue name="Action_Offers_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Sell_Action_Offers_Handler" instantiate="true">
             <conditions>
                 <check_any>
-                    <event_conversation_next_section section="Action_Offers"/>
-                    <event_conversation_returned_to_section section="Action_Offers"/>
+                    <event_conversation_next_section section="Ownership_Management_Station_Sell_Action_Offers"/>
+                    <event_conversation_returned_to_section section="Ownership_Management_Station_Sell_Action_Offers"/>
                 </check_any>
             </conditions>
             <actions>
@@ -93,7 +93,7 @@
                     <do_if value="$faction != null">
                         <!-- Формирование кнопки: Название фракции + динамически рассчитанная цена продажи в формате (%1cs %Cr) -->
                         <!-- choiceparam передает накопленный массив данных о сделке в финальный хэндлер продажи -->
-                        <add_player_choice_sub text="'%1 (%2)'.[$faction.name, $TotalPrice.formatted.{'%1cs %Cr'}]" position="$i" choiceparam="[$actualSiteItemId, $faction, $relation, $TotalPrice]" section="Action_Sell"/>
+                        <add_player_choice_sub text="'%1 (%2)'.[$faction.name, $TotalPrice.formatted.{'%1cs %Cr'}]" position="$i" choiceparam="[$actualSiteItemId, $faction, $relation, $TotalPrice]" section="Ownership_Management_Station_Sell_Action_Sell"/>
                     </do_if>
                 </do_all>
                 <!-- Интерфейс навигации: вывод сервисных кнопок переключения страниц -->
@@ -103,22 +103,22 @@
                 </do_if>
                 <do_else>
                     <!-- ID 3: На последующих страницах кнопка "Предыдущая страница" (параметр 'previous') -->
-                    <add_player_choice text="{94898935,2}" choiceparam="'previous'" position="bottom_right" section="Action_Offers"/>
+                    <add_player_choice text="{94898935,2}" choiceparam="'previous'" position="bottom_right" section="Ownership_Management_Station_Sell_Action_Offers"/>
                 </do_else>
                 <do_if value="$validFactions.count gt 4">
                     <!-- ID 4: Если фракций больше 4, выводим во вторую колонку кнопку "Следующая страница" (параметр 'next') -->
-                    <add_player_choice text="{94898935,3}" choiceparam="'next'" position="right" section="Action_Offers"/>
+                    <add_player_choice text="{94898935,3}" choiceparam="'next'" position="right" section="Ownership_Management_Station_Sell_Action_Offers"/>
                 </do_if>
             </actions>
         </cue>
 
         <!-- Шаг 4: Выполнение продажи -->
-        <cue name="Action_Sell_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Sell_Action_Sell_Handler" instantiate="true">
         <conditions>
             <check_any>
             <!-- ПРОВЕРКА: Игрок выбрал конкретную фракцию и подтвердил продажу -->
-            <event_conversation_next_section section="Action_Sell"/>
-            <event_conversation_returned_to_section section="Action_Sell"/>
+            <event_conversation_next_section section="Ownership_Management_Station_Sell_Action_Sell"/>
+            <event_conversation_returned_to_section section="Ownership_Management_Station_Sell_Action_Sell"/>
             </check_any>
         </conditions>
         <actions>

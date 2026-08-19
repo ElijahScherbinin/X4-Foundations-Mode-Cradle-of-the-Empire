@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mdscript name="Mission_Advanced_Radar_Dish" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="md.xsd">
+  <cues>
+    
+    <!-- Системный триггер загрузки сохранения и старта игры -->
+    <cue name="Mission_Advanced_Radar_Dish_Setup">
+      <conditions>
+        <check_any>
+          <event_cue_signalled cue="md.Setup.GameStart" />
+          <event_cue_signalled cue="md.Setup.Start"/>
+        </check_any>
+        <check_value value="player.headquarters" />
+      </conditions>
+      <actions>
+        <set_value name="$BosoTa" exact="md.$PersistentCharacters.$BosoTa"/>
+        <signal_cue cue="Mission_Advanced_Radar_Dish_Start_Mission" />
+      </actions>
+      <cues>
+  
+        <cue name="Mission_Advanced_Radar_Dish_Start_Mission" instantiate="true">
+          <conditions>
+            <event_cue_signalled />
+          </conditions>
+          <actions>
+            <create_mission cue="this" name="{94898937,1}" description="{94898937,2}" rewardtext="{94898937,3}" faction="faction.player" type="missiontype.think" abortable="false" difficulty="level.veryeasy"> 
+              <briefing>
+                <objective step="1" action="objective.talkto" object="$BosoTa" />
+              </briefing>
+            </create_mission>
+            <set_objective_from_briefing cue="this" step="1"/>
+          </actions>
+          <cues>
+
+            <cue name="Mission_Advanced_Radar_Dish_Contact_BosoTa_Handler" instantiate="true">
+              <conditions>
+                <!-- ПРОВЕРКА: начат разговор с NPC Босо Та -->
+                <event_conversation_started actor="$BosoTa" />
+              </conditions>
+              <actions>
+                <do_if value="@md.ExtendedConversationMenu.Main.exists">
+                  <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$UpdateRadarContactBosoTaMenu" exact="table[ $signalCue = Mission_Advanced_Radar_Dish_Contact_BosoTa_Menu_Handler, $params = [] ]" />
+                </do_if>
+                <do_else>
+                  <signal_cue_instantly cue="Mission_Advanced_Radar_Dish_Contact_BosoTa_Menu_Handler" />
+                </do_else>
+              </actions>
+            </cue>
+
+            <cue name="Mission_Advanced_Radar_Dish_Contact_BosoTa_Menu_Handler" instantiate="true">
+              <conditions>
+                <event_cue_signalled />
+              </conditions>
+              <actions>
+                <add_player_choice_sub text="{94898937,4}" section="Mission_Advanced_Radar_Dish_Success" />
+              </actions>
+            </cue>
+
+            <cue name="Mission_Advanced_Radar_Dish_Success_Handler" instantiate="true">
+              <conditions>
+                <event_conversation_next_section section="Mission_Advanced_Radar_Dish_Success" />
+              </conditions>
+              <actions>
+                <add_blueprints wares="ware.module_advanced_radar_arg_dish" />                
+                <!-- Очистка интерфейса -->
+                <remove_mission cue="parent" status="missionstatus.completed" />
+                <cancel_cue cue="parent" />
+              </actions>
+            </cue>
+
+          </cues>
+        </cue>
+
+      </cues>
+    </cue>
+  </cues>
+</mdscript>

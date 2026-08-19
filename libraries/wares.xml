@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diff>
+  <add sel="/wares">
+    <ware id="module_advanced_radar_arg_dish" name="{94898936,1}" description="{94898936,3}" transport="container" volume="1" tags="module">
+      <price min="10972490" average="14555880" max="18139260" />
+      <production time="867" amount="1" method="default" name="{20206,101}">
+        <primary>
+          <ware ware="advancedelectronics" amount="1200" />
+          <ware ware="claytronics" amount="1483" />
+          <ware ware="energycells" amount="1441" />
+          <ware ware="hullparts" amount="1986" />
+        </primary>
+      </production>
+      <component ref="advanced_radar_arg_dish_macro" amount="1" />
+      <restriction licence="station_gen_intermediate" />
+      <owner faction="player" />
+    </ware>
+  </add>
+  <replace sel="/wares/ware[@id='energycells']/price">
+      <price min="18" average="24" max="36" />
+  </replace>
+</diff>

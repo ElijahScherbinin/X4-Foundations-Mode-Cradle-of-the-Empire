@@ -4,4 +4,5 @@
   <entry name="coe_SE_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_sectors" />
   <entry name="coe_ZO_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_zones" />
   <entry name="coe_ZOH_*" value="extensions\qz_mod_empire\maps\xu_ep2_universe\coe_zonehighways" />
+  <entry name="advanced_radar_arg_dish_macro" value="extensions\qz_mod_empire\assets\structures\radar\macros\advanced_radar_arg_dish_macro" />
 </index>

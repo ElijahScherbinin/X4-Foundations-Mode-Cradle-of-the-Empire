@@ -312,4 +312,36 @@
     <component ref="standardzone" />
     <connections />
   </macro>
+  <macro name="coe_ZO_c003_s001_z012_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c003_s001_z012_Cluster_706_Sector001_z001_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="180" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_anc_gate_macro" connection="space">
+          <properties>
+            <state active="false" />
+          </properties>
+        </macro>
+      </connection>
+    </connections>
+  </macro>
+  <macro name="coe_ZO_c003_s001_z013_macro" class="zone">
+    <component ref="standardzone" />
+    <connections>
+      <connection name="coe_GA_g001_c003_s001_z013_Cluster_41_Sector001_z001_connection" ref="gates">
+        <offset>
+          <position x="0" y="1000" z="0" />
+          <rotation yaw="300" pitch="0" roll="0" />
+        </offset>
+        <macro ref="props_gates_anc_gate_macro" connection="space">
+          <properties>
+            <state active="false" />
+          </properties>
+        </macro>
+      </connection>
+    </connections>
+  </macro>
 </macros>

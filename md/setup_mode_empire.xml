@@ -98,7 +98,7 @@
         <event_universe_generated />
       </conditions>
       <actions>
-        <!-- Находим земной сектор -->
+        <!-- Находим cектор -->
         <find_sector name="$TargetSector" macro="macro.coe_SE_c001_s001_macro" space="player.galaxy" required="true" />
         <do_if value="$TargetSector.exists">
           <!-- Координаты размещения корабля -->
@@ -149,7 +149,7 @@
         <event_universe_generated />
       </conditions>
       <actions>
-        <!-- Находим земной сектор -->
+        <!-- Находим cектор -->
         <find_sector name="$TargetSector" macro="macro.coe_SE_c002_s002_macro" space="player.galaxy" required="true" />
         <do_if value="$TargetSector.exists">
           <!-- Координаты размещения корабля -->
@@ -200,7 +200,7 @@
         <event_universe_generated />
       </conditions>
       <actions>
-        <!-- Находим земной сектор -->
+        <!-- Находим cектор -->
         <find_sector name="$TargetSector" macro="macro.coe_SE_c002_s001_macro" space="player.galaxy" required="true" />
         <do_if value="$TargetSector.exists">
           <!-- Координаты размещения корабля -->
@@ -251,7 +251,7 @@
         <event_universe_generated />
       </conditions>
       <actions>
-        <!-- Находим земной сектор -->
+        <!-- Находим cектор -->
         <find_sector name="$TargetSector" macro="macro.coe_SE_c002_s003_macro" space="player.galaxy" required="true" />
         <do_if value="$TargetSector.exists">
           <!-- Координаты размещения корабля -->
@@ -289,6 +289,39 @@
           <actions>
             <signal_cue cue="Give_Argon_Base_Blueprints_Kitstarter" />
             <signal_cue cue="Give_Argon_Solid_Factory_Blueprints_Kitstarter" />
+            <!-- Снимаем бессмертие с сейфа -->
+            <set_object_min_hull object="$Lockbox" exact="0" />
+          </actions>
+        </cue>
+      </cues>
+    </cue>
+
+    <!-- Спавн закрытого контейнера рядом с Око смотрителя -->
+    <cue name="Spawn_Lockbox_EyeBeholder_Cluster_504_Sector001">
+      <conditions>
+        <event_universe_generated />
+      </conditions>
+      <actions>
+        <!-- Находим cектор -->
+        <find_sector name="$TargetSector" macro="macro.Cluster_504_Sector001_macro" space="player.galaxy" required="true" />
+        <!-- Находим станцию -->
+        <find_station name="$EyeBeholder" space="$TargetSector" godstationentry="'monument_s3station'" required="true"/>
+        <!-- Создаем контейнер с безопасным радиусом спавна 10000 метров от станции -->
+        <create_lockbox name="$Lockbox" macro="macro.sm_gen_lockbox_common_01_macro" sector="$EyeBeholder.sector">
+          <safepos value="$EyeBeholder.position" max="10000m" />
+        </create_lockbox>
+        <!-- Защищаем контейнер от случайного взрыва (прочность корпуса заблокирована на 100%) -->
+        <set_object_min_hull object="$Lockbox" exact="100" />
+      </actions>
+      <cues>
+        <!-- Очередь, отслеживающая сбор лута игроком -->
+        <cue name="Spawn_Lockbox_EyeBeholder_Cluster_504_Sector001_Collected">
+          <conditions>
+            <!-- Срабатывает, когда замки отстрелены и контейнеры выпали -->
+            <event_object_dropped_objects object="$Lockbox" />
+          </conditions>
+          <actions>
+            <add_blueprints wares="ware.module_advanced_radar_arg_dish" />
             <!-- Снимаем бессмертие с сейфа -->
             <set_object_min_hull object="$Lockbox" exact="0" />
           </actions>

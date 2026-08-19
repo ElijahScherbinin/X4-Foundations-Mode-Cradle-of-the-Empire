@@ -1,86 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="HQ_Better_Call" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="..\..\..\libraries\md.xsd">
+<mdscript name="HQ_Better_Call" xmlns:xsi="http://w3.org" xsi:noNamespaceSchemaLocation="md.xsd">
   <cues>
     
-    <!-- Шаг 1: Перехват разговора с менеджером -->
-    <cue name="Contact_Manager_Handler" instantiate="true">
+    <cue name="HQ_Better_Call_Setup">
       <conditions>
-        <check_any>
-          <!-- ПРОВЕРКА: Личное общение -->
-          <event_conversation_started conversation="default" />
-          <event_conversation_returned_to_section section="default" />
-          <!-- ПРОВЕРКА: Общение по каналу связи -->
-          <event_conversation_started conversation="Speak_" />
-          <event_conversation_returned_to_section section="Speak_" />
-        </check_any>
-        <!-- ПРОВЕРКА: NPC является менеджером -->
-        <check_value value="event.object.controlpost == controlpost.manager" />
-        <!-- ПРОВЕРКА: является Штаб-квартирой -->
-        <check_value value="event.object.station.isheadquarters" />
-        <!-- ПРОВЕРКА: станция принадлежит игроку -->
-        <check_value value="event.object.station.isplayerowned" />
+        <event_cue_signalled cue="md.Setup.Start" />
       </conditions>
       <actions>
-        <do_if value="@md.ExtendedConversationMenu.Main.exists">
-          <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$BetterCallManagerMenu" exact="table[ $signalCue = Contact_Manager_Menu_Handler, $params = [] ]" />
-        </do_if>
-        <do_else>
-          <signal_cue_instantly cue="Contact_Manager_Menu_Handler" />
-        </do_else>
+        <set_value name="$DalBusta" exact="md.$PersistentCharacters.$DalBusta"/>
+        <set_value name="$BosoTa" exact="md.$PersistentCharacters.$BosoTa"/>
       </actions>
-    </cue> 
+      <cues>
+        <!-- Шаг 1: Перехват разговора с менеджером -->
+        <cue name="HQ_Better_Call_Contact_Manager_Handler" instantiate="true">
+          <conditions>
+            <check_any>
+              <!-- ПРОВЕРКА: Личное общение -->
+              <event_conversation_started conversation="default" />
+              <event_conversation_returned_to_section section="default" />
+              <!-- ПРОВЕРКА: Общение по каналу связи -->
+              <event_conversation_started conversation="Speak_" />
+              <event_conversation_returned_to_section section="Speak_" />
+            </check_any>
+            <!-- ПРОВЕРКА: NPC является менеджером -->
+            <check_value value="event.object.controlpost == controlpost.manager" />
+            <!-- ПРОВЕРКА: является Штаб-квартирой -->
+            <check_value value="event.object.station.isheadquarters" />
+            <!-- ПРОВЕРКА: станция принадлежит игроку -->
+            <check_value value="event.object.station.isplayerowned" />
+          </conditions>
+          <actions>
+            <do_if value="@md.ExtendedConversationMenu.Main.exists">
+              <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$ContactManagerMenu" exact="table[ $signalCue = HQ_Better_Call_Contact_Manager_Menu_Handler, $params = [] ]" />
+            </do_if>
+            <do_else>
+              <signal_cue_instantly cue="HQ_Better_Call_Contact_Manager_Menu_Handler" />
+            </do_else>
+          </actions>
+        </cue> 
 
-    <!-- Шаг 2: Добавление главной кнопки "Управление связью" в меню менеджера -->
-    <cue name="Contact_Manager_Menu_Handler" instantiate="true">
-      <conditions>
-        <event_cue_signalled />
-      </conditions>
-      <actions>
-        <!-- ID 1: "Управление связью". -->
-        <add_player_choice_sub text="{94898934,1}" section="Select_Contact" />
-      </actions>
-    </cue> 
+        <!-- Шаг 2: Добавление главной кнопки "Управление связью" в меню менеджера -->
+        <cue name="HQ_Better_Call_Contact_Manager_Menu_Handler" instantiate="true">
+          <conditions>
+            <event_cue_signalled />
+          </conditions>
+          <actions>
+            <!-- ID 1: "Управление связью". -->
+            <add_player_choice_sub text="{94898934,1}" section="HQ_Better_Call_Select_Contact" />
+          </actions>
+        </cue> 
 
-    <!-- Шаг 3: Добавление кнопкок связи в меню менеджера -->
-    <cue name="Select_Contact_Handler" instantiate="true">
-      <conditions>
-        <event_conversation_next_section section="Select_Contact" />
-      </conditions>
-      <actions>
-        <!-- ID 3: "Мне нужно связаться с Дал Буста". -->
-        <add_player_choice_sub text="{94898934,2}" section="Action_DalBusta" />
-        <!-- ID 4: "Мне нужно связаться с Босо Та". -->
-        <add_player_choice_sub text="{94898934,3}" section="Action_BosoTa" />
-        <!-- ID 2: Кнопка "Назад" в правый нижний угол -->
-        <add_player_choice_return position="bottom_right" text="{94898935,1}"/>
-      </actions>
-    </cue> 
+        <!-- Шаг 3: Добавление кнопкок связи в меню менеджера -->
+        <cue name="HQ_Better_Call_Select_Contact_Handler" instantiate="true">
+          <conditions>
+            <event_conversation_next_section section="HQ_Better_Call_Select_Contact" />
+          </conditions>
+          <actions>
+            <!-- ID 3: "Мне нужно связаться с Дал Буста". -->
+            <add_player_choice_sub text="{94898934,2}" section="HQ_Better_Call_Action_DalBusta" />
+            <!-- ID 4: "Мне нужно связаться с Босо Та". -->
+            <add_player_choice_sub text="{94898934,3}" section="HQ_Better_Call_Action_BosoTa" />
+            <!-- ID 2: Кнопка "Назад" в правый нижний угол -->
+            <add_player_choice_return position="bottom_right" text="{94898935,1}"/>
+          </actions>
+        </cue> 
 
-    <!-- Шаг 4: Вызов Дал Буста по дальней связи -->
-    <cue name="Action_DalBusta_Handler" instantiate="true">
-      <conditions>
-        <event_conversation_next_section section="Action_DalBusta" />
-      </conditions>
-      <actions>
-        <do_if value="@md.$PersistentCharacters.$DalBusta">
-          <!-- Открываем удаленный разговор (вызов по видеосвязи) -->
-          <start_conversation actor="md.$PersistentCharacters.$DalBusta" conversation="Speak_" />
-        </do_if>
-      </actions>
+        <!-- Шаг 4: Вызов Дал Буста по дальней связи -->
+        <cue name="HQ_Better_Call_Action_DalBusta_Handler" instantiate="true">
+          <conditions>
+            <event_conversation_next_section section="HQ_Better_Call_Action_DalBusta" />
+          </conditions>
+          <actions>
+            <do_if value="$DalBusta">
+              <!-- Открываем удаленный разговор (вызов по видеосвязи) -->
+              <start_conversation actor="$DalBusta" conversation="Speak_" />
+            </do_if>
+          </actions>
+        </cue>
+
+        <!-- Шаг 5: Вызов Босо Та по дальней связи -->
+        <cue name="HQ_Better_Call_Action_BosoTa_Handler" instantiate="true">
+          <conditions>
+            <event_conversation_next_section section="HQ_Better_Call_Action_BosoTa" />
+          </conditions>
+          <actions>
+            <do_if value="$BosoTa">
+              <!-- Открываем удаленный разговор (вызов по видеосвязи) -->
+              <start_conversation actor="$BosoTa" conversation="Speak_" />
+            </do_if>
+          </actions>
+        </cue> 
+
+      </cues>
     </cue>
-
-    <!-- Шаг 5: Вызов Босо Та по дальней связи -->
-    <cue name="Action_BosoTa_Handler" instantiate="true">
-      <conditions>
-        <event_conversation_next_section section="Action_BosoTa" />
-      </conditions>
-      <actions>
-        <do_if value="@md.$PersistentCharacters.$BosoTa">
-          <!-- Открываем удаленный разговор (вызов по видеосвязи) -->
-          <start_conversation actor="md.$PersistentCharacters.$BosoTa" conversation="Speak_" />
-        </do_if>
-      </actions>
-    </cue>  
 
   </cues>
 </mdscript>

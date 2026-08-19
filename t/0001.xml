@@ -50,7 +50,7 @@
     <t id="6">Gate from %1(sector) to %2(sector) success closed</t>    
   </page>
 
-  <page id="94898934" title="Dialog better call manager" descr="" voice="no">
+  <page id="94898934" title="Dialog better call" descr="" voice="no">
     <t id="1">Communication management</t>
     <t id="2">I need to contact Dal Busta</t>
     <t id="3">I need to contact Boso Ta</t>
@@ -60,5 +60,18 @@
     <t id="1">Back</t>
     <t id="2">Previous page</t>
     <t id="3">Next page</t>
+  </page>
+
+  <page id="94898936" title="Modules station" descr="" voice="no">
+    <t id="1">Advanced Wide Area Sensor Array</t>
+    <t id="2">Advanced Sensor Array</t>
+    <t id="3">{20006,102}(No information available)</t>
+  </page>
+
+  <page id="94898937" title="Quests" descr="" voice="no">
+    <t id="1">(Title)Gate control module</t>
+    <t id="2">(Description)Boso Ta found scientific records about gate control in the headquarters archives. With their help, it was possible to create a blueprint: {94898936,1}. Boso Ta asks you to contact him to transfer this technology to you.</t>
+    <t id="3">(Reward)Blueprint: {94898936,1}</t>
+    <t id="4">(Dialog)Get new blueprint</t>
   </page>
 </language>

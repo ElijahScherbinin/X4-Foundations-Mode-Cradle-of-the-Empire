@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mdscript name="Ownership_Management_Buy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\libraries\md.xsd">
+<mdscript name="Ownership_Management_Station_Buy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="md.xsd">
     <cues>
         
         <!-- Шаг 1: Перехват разговора с менеджером -->
-        <cue name="Contact_Manager_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Buy_Contact_Manager_Handler" instantiate="true">
         <conditions>
             <check_any>
                 <!-- ПРОВЕРКА: Личное общение -->
                 <event_conversation_started conversation="default" />
                 <event_conversation_returned_to_section section="default" />
+                <!-- ПРОВЕРКА: Общение по каналу связи -->
+                <event_conversation_started conversation="Speak_" />
+                <event_conversation_returned_to_section section="Speak_" />
             </check_any>
             <check_all>
                 <!-- ПРОВЕРКА: NPC является менеджером -->
@@ -21,31 +24,31 @@
         </conditions>
         <actions>
             <do_if value="@md.ExtendedConversationMenu.Main.exists">
-                <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$OwnershipControlMenu" exact="table[ $signalCue = Contact_Manager_Menu_Handler, $params = [] ]" />
+                <set_value name="md.ExtendedConversationMenu.Main.$convOptions.$ContactManagerMenu" exact="table[ $signalCue = Ownership_Management_Station_Buy_Contact_Manager_Menu_Handler, $params = [] ]" />
             </do_if>
             <do_else>
-                <signal_cue_instantly cue="Contact_Manager_Menu_Handler" />
+                <signal_cue_instantly cue="Ownership_Management_Station_Buy_Contact_Manager_Menu_Handler" />
             </do_else>
         </actions>
         </cue>
 
         <!-- Шаг 2: Добавление главной кнопки "Управление собственностью" в меню менеджера -->
-        <cue name="Contact_Manager_Menu_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Buy_Contact_Manager_Menu_Handler" instantiate="true">
             <conditions>
                 <event_cue_signalled />
             </conditions>
             <actions>
                 <!-- ID 1: "Управление собственностью". -->
-                <add_player_choice_sub text="{94898930,1}" section="Action_Offer" />
+                <add_player_choice_sub text="{94898930,1}" section="Ownership_Management_Station_Buy_Action_Offer" />
             </actions>
         </cue>
 
         <!-- Шаг 3: Представление предложения о продаже -->
-        <cue name="Action_Offer_Handler" instantiate="true">
+        <cue name="Ownership_Management_Station_Buy_Action_Offer_Handler" instantiate="true">
             <conditions>
                 <check_any>
-                    <event_conversation_next_section section="Action_Offer"/>
-                    <event_conversation_returned_to_section section="Action_Offer"/>
+                    <event_conversation_next_section section="Ownership_Management_Station_Buy_Action_Offer"/>
+                    <event_conversation_returned_to_section section="Ownership_Management_Station_Buy_Action_Offer"/>
                 </check_any>
             </conditions>
             <actions>
@@ -61,25 +64,25 @@
                 <do_for_each name="$Ware" in="event.object.container.products.list">
                     <set_value name="$AverageRelativePriceOfProduct" exact="0f" />
                     <find_station_by_true_owner name="$StationsProducingWare" faction="event.object.station.owner" space="player.galaxy" multiple="true">
-                    <match_products wares="$Ware"/>
+                        <match_products wares="$Ware"/>
                     </find_station_by_true_owner>
                     <do_for_each name="$Station" in="$StationsProducingWare">
-                    <find_sell_offer result="$Trade" seller="$Station" wares="$Ware" />
-                    <!-- Безопасная проверка: если предложение на рынке реально существует -->
-                    <do_if value="$Trade != null">
-                        <set_value name="$AverageRelativePriceOfProduct" exact="$Trade.relativeprice" operation="add" />
-                    </do_if>
-                    <do_else>
-                        <!-- Если станция ничего не продает, считаем её цену нейтральной (0.0f) -->
-                        <set_value name="$AverageRelativePriceOfProduct" exact="0.0f" operation="add" />
-                    </do_else>
+                        <find_sell_offer result="$Trade" seller="$Station" wares="$Ware" />
+                        <!-- Безопасная проверка: если предложение на рынке реально существует -->
+                        <do_if value="$Trade != null">
+                            <set_value name="$AverageRelativePriceOfProduct" exact="$Trade.relativeprice" operation="add" />
+                        </do_if>
+                        <do_else>
+                            <!-- Если станция ничего не продает, считаем её цену нейтральной (0.0f) -->
+                            <set_value name="$AverageRelativePriceOfProduct" exact="0.0f" operation="add" />
+                        </do_else>
                     </do_for_each>
                     <do_if value="$StationsProducingWare.count gt 1">
-                    <set_value name="$AverageRelativePriceOfProduct" exact="$AverageRelativePriceOfProduct / ($StationsProducingWare.count)f" />
+                        <set_value name="$AverageRelativePriceOfProduct" exact="$AverageRelativePriceOfProduct / ($StationsProducingWare.count)f" />
                     </do_if>
                     <do_else>
-                    <!-- Если это последняя станция, производящая товар, она получает максимальный относительный ценовой коэффициент. -->
-                    <set_value name="$AverageRelativePriceOfProduct" exact="1.0f" />
+                        <!-- Если это последняя станция, производящая товар, она получает максимальный относительный ценовой коэффициент. -->
+                        <set_value name="$AverageRelativePriceOfProduct" exact="1.0f" />
                     </do_else>
                     <append_to_list name="$AverageRelativePricesOfProducts" exact="$AverageRelativePriceOfProduct" />
                     <remove_value name="$AverageRelativePriceOfProduct" />
@@ -92,19 +95,19 @@
                 <!-- Финальный расчет цены покупки с учетом экспоненты дефицита -->
                 <set_value name="$FinalPrice" exact="(($StationPrice + $CargoPrice + $BuildPlotPrice) ^ (1+($MaxRelativePriceOfAnyProduct/10)))ct" />
                 <!-- choiceparam передает текущую фракцию-владельца и рассчитанную стоимость в финальный обработчик покупки -->
-                <add_player_choice_sub text="{94898931,1}.[$FinalPrice.formatted.{'%1cs %Cr'}]" position="1" choiceparam="[event.object.station.owner, $FinalPrice]" section="Action_Buy"/>
+                <add_player_choice_sub text="{94898931,1}.[$FinalPrice.formatted.{'%1cs %Cr'}]" position="1" choiceparam="[event.object.station.owner, $FinalPrice]" section="Ownership_Management_Station_Buy_Action_Buy"/>
                 <!-- ID 2: Кнопка "Назад" в правый нижний угол -->
                 <add_player_choice_return position="bottom_right" text="{94898935,1}"/>
             </actions>
         </cue>
         
-        <!-- Шаг 3: Выполнение покупки -->
-        <cue name="Action_Buy_Handler" instantiate="true">
+        <!-- Шаг 4: Выполнение покупки -->
+        <cue name="Ownership_Management_Station_Buy_Action_Buy_Handler" instantiate="true">
             <conditions>
                 <check_any>
                     <!-- ПРОВЕРКА: Игрок подтвердил покупку выбранной NPC станции -->
-                    <event_conversation_next_section section="Action_Buy"/>
-                    <event_conversation_returned_to_section section="Action_Buy"/>
+                    <event_conversation_next_section section="Ownership_Management_Station_Buy_Action_Buy"/>
+                    <event_conversation_returned_to_section section="Ownership_Management_Station_Buy_Action_Buy"/>
                 </check_any>
             </conditions>
             <actions>

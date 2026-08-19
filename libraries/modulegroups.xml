@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<diff>
+  <add sel="/groups/group[@name='radar_gen']" pos="before">
+    <select macro="advanced_radar_arg_dish_macro" />
+  </add>
+</diff>
