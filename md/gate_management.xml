@@ -71,7 +71,7 @@
         <!-- ФИЛЬТРАЦИЯ: Удаляем врата у которых нет связи с другим сектором -->
         <do_all exact="$SectorGates.count" counter="$i" reverse="true">
           <set_value name="$Gate" exact="$SectorGates.{$i}" />
-            <do_if value="not $Gate.exit.exists or not $Gate.exit.sector.exists">
+            <do_if value="$Gate == null or not $Gate.exit.exists or not $Gate.exit.sector.exists">
               <remove_value name="$Gate"/>
             </do_if>
         </do_all>
